@@ -1,0 +1,23 @@
+To start the basic scenario:
+
+>> marble start
+
+To stop:
+
+>> marble stop
+
+This can be done in the terminal you ran from, even though text is scrolling by.  Or run from another terminal.
+
+To move a vehicle:
+
+>> roskeys.sh X1
+
+Where X1 can be X1, X2, etc.
+
+To start guidance:
+
+>> marble explore
+
+To stop guidance without stopping the rest of the simulation:
+
+>> marble stop explore

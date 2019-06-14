@@ -1,0 +1,51 @@
+#!/bin/bash
+if [ "$1" == "start" ]; then
+  echo "Starting MARBLE services..."
+  export X1_SENSOR_CONFIG_4=1
+
+  # Run our launch file
+  roslaunch ~/marble/scripts/subt.launch &
+  sleep 10
+
+  # Turn on headlights.  See if we can move to launch file
+  rosservice call /X1/left_headlight/enable "data: true"
+  rosservice call /X1/right_headlight/enable "data: true"
+  rosservice call /X2/left_headlight/enable "data: true"
+  rosservice call /X2/right_headlight/enable "data: true"
+
+  # Run the python scripts
+  # TF Transforms
+  python2 ~/marble/scripts/world_to_bot_tf.py &
+  # Odometry correction
+  python2 ~/catkin/src/marble-frontier/FastMarching3D_ROS/src/subt_true_odom.py X1 &
+  python2 ~/catkin/src/marble-frontier/FastMarching3D_ROS/src/subt_true_odom.py X2 &
+  # Start comms
+  python2 ~/catkin/src/marble_multi_agent/src/comms_sim_handler.py &
+
+
+elif [ "$1" == "stop" ]; then
+  if [ "$2" == "explore" ]; then
+    echo "Stopping MARBLE exploration..."
+    pkill -9 -f subt_guidance_node.py
+    rosnode kill X1/global_planning
+    rosnode kill X2/global_planning
+  else
+    echo "Stopping MARBLE services..."
+    rosnode kill -a
+    killall -9 gzserver
+    killall -9 rosmaster
+    pkill -9 -f comms_sim_handler.py
+    pkill -9 -f world_to_bot_tf.py
+    pkill -9 -f subt_true_odom.py
+    pkill -9 -f subt_guidance_node.py
+    killall -9 relay
+  fi
+elif [ "$1" == "explore" ]; then
+  echo "Starting MARBLE exploration..."
+  roslaunch msfm3d msfm3d.launch vehicle:=X1 &
+  roslaunch msfm3d msfm3d.launch vehicle:=X2 &
+  python2 ~/catkin/src/marble-frontier/FastMarching3D_ROS/src/subt_guidance_node.py "X1" "ground" "L2" 1.0 &
+  python2 ~/catkin/src/marble-frontier/FastMarching3D_ROS/src/subt_guidance_node.py "X2" "ground" "L2" 1.0 &
+else
+  echo "Please tell me if you want to start, stop or explore!"
+fi
