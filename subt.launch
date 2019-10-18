@@ -2,7 +2,7 @@
 <launch>
   <!-- Load the environment and Gazebo -->
   <arg name="debug" default="false"/>
-  <arg name="scenario" default="tunnel_practice_1"/>
+  <arg name="scenario" default="tunnel_practice_2"/>
   <arg name="extra_gazebo_args" default=""/>
 
   <param name="subt/gazebo_worlds_dir" value="$(find subt_gazebo)/worlds/" />
@@ -22,14 +22,24 @@
   <include file="$(env HOME)/marble/scripts/robots.launch" />
 
   <!-- Start Voxblox.  May want to add parameter to launch either voxblox or octomap. -->
-  <include file="$(env HOME)/marble/scripts/voxblox.launch">
+  <!-- <include file="$(env HOME)/marble/scripts/voxblox.launch"> -->
+    <!-- <arg name="robot_name" value="X1" /> -->
+  <!-- </include> -->
+
+  <!-- <include file="$(env HOME)/marble/scripts/voxblox.launch"> -->
+    <!-- <arg name="robot_name" value="X2" /> -->
+  <!-- </include> -->
+
+  <!-- Start Octomap -->
+  <include file="$(env HOME)/marble/scripts/octomap.launch">
     <arg name="robot_name" value="X1" />
   </include>
 
-  <include file="$(env HOME)/marble/scripts/voxblox.launch">
+  <include file="$(env HOME)/marble/scripts/octomap.launch">
     <arg name="robot_name" value="X2" />
   </include>
 
   <!-- Start Rviz and load config -->
   <!-- <node pkg="rviz" type="rviz" name="marble_visualization" args="&#45;d $(env HOME)/marble/scripts/marble.rviz" /> -->
+  <!-- <node pkg="rviz" type="rviz" name="marble_anchor_visualization" args="&#45;d $(env HOME)/marble/scripts/anchor.rviz" /> -->
 </launch>
