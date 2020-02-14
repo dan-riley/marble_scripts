@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<launch>
+  <node pkg="rviz" type="rviz" name="marble_gui" args="-d $(env HOME)/base_station/multi_agent.rviz" />
+  <node pkg="rviz" type="rviz" name="marble_h01" args="-d $(env HOME)/base_station/h01.rviz" />
+  <node pkg="rviz" type="rviz" name="marble_t01" args="-d $(env HOME)/base_station/t01.rviz" />
+
+ </launch>

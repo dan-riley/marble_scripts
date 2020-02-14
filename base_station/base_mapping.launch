@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<launch>
+  <include file="$(find octomap_merger)/launch/octomap_merger_base.launch" />
+  <include file="$(find merge_poses_pkg)/launch/merge_poses_ma.launch" />
+  <!-- <include file="$(find octomap_pc2_converter)/launch/convert_merged.launch" /> -->
+  <!-- <include file="$(find octomap_pc2_converter)/launch/merge.launch" /> -->
+
+  <!-- <include file="$(find mapping_relay)/launch/test_mapping_relay.launch"> -->
+  <!-- <include file="$(find mapping_relay)/launch/mapping_relay.launch"> -->
+  <!--   <!&#45;&#45; Safety Research Mine &#45;&#45;> -->
+  <!--   <arg name="mapping_server_ip" value="10.100.1.201" /> -->
+  <!--   <!&#45;&#45; Experimental Mine &#45;&#45;> -->
+  <!--   <!&#45;&#45; <arg name="mapping_server_ip" value="10.100.2.201" /> &#45;&#45;> -->
+  <!-- </include> -->
+
+ </launch>

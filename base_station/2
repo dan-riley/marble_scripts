@@ -1,0 +1,10 @@
+#!/bin/bash
+# trap 'kill %2; kill %3; kill %4' SIGINT
+# roslaunch octomap_pc2_converter merge_map.launch &
+# rostopic pub -r 10 /map_choice std_msgs/Int8 '{data: 7}'
+read -r -p "Did you remember to change the DARPA server settings? [Y/n] " response
+response=${response,,}
+if [[ "$response" =~ ^(yes|y|'')$ ]]
+then
+    roslaunch ~/base_station/base_mapping.launch
+fi
