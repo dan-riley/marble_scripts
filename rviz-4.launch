@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Start Rviz and load config -->
+  <node pkg="rviz" type="rviz" name="marble_visualization" args="-d $(env HOME)/marble/scripts/marble-4.rviz" />
+  <node pkg="rviz" type="rviz" name="marble_anchor_visualization" args="-d $(env HOME)/marble/scripts/anchor-4.rviz" />
+</launch>

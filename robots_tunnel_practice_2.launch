@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <launch>
   <!-- Spawn your team here. -->
-  <arg name="anchor_name" default="Anchor" />
+  <arg name="anchor_name" default="Base" />
   <arg name="x1_name" default="X1" />
   <arg name="x2_name" default="X2" />
-  <arg name="b1_name" default="B1" />
-  <arg name="b2_name" default="B2" />
-  <arg name="b3_name" default="B3" />
-  <arg name="b4_name" default="B4" />
-  <arg name="b5_name" default="B5" />
-  <arg name="b6_name" default="B6" />
-  <arg name="b7_name" default="B7" />
-  <arg name="b8_name" default="B8" />
+  <arg name="b1_name" default="B01" />
+  <arg name="b2_name" default="B02" />
+  <arg name="b3_name" default="B03" />
+  <arg name="b4_name" default="B04" />
+  <arg name="b5_name" default="B05" />
+  <arg name="b6_name" default="B06" />
+  <arg name="b7_name" default="B07" />
+  <arg name="b8_name" default="B08" />
 
   <!-- <arg name="x3_name" default="X3" /> -->
   <!-- <arg name="x4_name" default="X4" /> -->

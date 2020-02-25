@@ -1,4 +1,5 @@
 #!/bin/bash
-killall -9 relay
-rosrun topic_tools relay /cmd_vel /$1/cmd_vel &
-rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+#killall -9 relay
+# trap 'kill %1' SIGINT
+# rosrun topic_tools relay /cmd_vel /$1/cmd_vel &
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py /cmd_vel:=/$1/cmd_vel

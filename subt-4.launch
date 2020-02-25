@@ -12,43 +12,64 @@
          value="$(find subt_gazebo)/worlds/$(arg scenario).world" />
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
-    <arg name="gui" value="false"/>
+    <arg name="gui" value="true"/>
     <arg name="headless" value="false"/>
     <arg name="debug" value="$(arg debug)"/>
     <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args) --verbose"/>
   </include>
 
   <!-- Load our robots.  May want to add parameters to decide which robots. -->
-  <include file="$(env HOME)/marble/scripts/robots_$(arg scenario).launch" />
+  <include file="$(env HOME)/marble/scripts/robots_$(arg scenario)-4.launch" />
 
   <!-- Start Voxblox.  May want to add parameter to launch either voxblox or octomap. -->
-  <!-- <include file="$(env HOME)/marble/scripts/voxblox.launch"> -->
-  <!--   <arg name="robot_name" value="X1" /> -->
-  <!-- </include> -->
-  <!--  -->
-  <!-- <include file="$(env HOME)/marble/scripts/voxblox.launch"> -->
-  <!--   <arg name="robot_name" value="X2" /> -->
-  <!-- </include> -->
-  <!--  -->
-  <!-- <!&#45;&#45; Start filtering for voxblox, to remove the ground &#45;&#45;> -->
-  <!-- <include file="$(env HOME)/marble/scripts/filter.launch"> -->
-  <!--   <arg name="robot_name" value="X1" /> -->
-  <!-- </include> -->
-  <!--  -->
-  <!-- <include file="$(env HOME)/marble/scripts/filter.launch"> -->
-  <!--   <arg name="robot_name" value="X2" /> -->
-  <!-- </include> -->
+  <include file="$(env HOME)/marble/scripts/voxblox.launch">
+    <arg name="robot_name" value="X1" />
+  </include>
+
+  <include file="$(env HOME)/marble/scripts/voxblox.launch">
+    <arg name="robot_name" value="X2" />
+  </include>
+
+  <include file="$(env HOME)/marble/scripts/voxblox.launch">
+    <arg name="robot_name" value="X3" />
+  </include>
+
+  <include file="$(env HOME)/marble/scripts/voxblox.launch">
+    <arg name="robot_name" value="X4" />
+  </include>
+
+  <!-- Start filtering for voxblox, to remove the ground -->
+  <include file="$(env HOME)/marble/scripts/filter.launch">
+    <arg name="robot_name" value="X1" />
+  </include>
+
+  <include file="$(env HOME)/marble/scripts/filter.launch">
+    <arg name="robot_name" value="X2" />
+  </include>
+
+  <include file="$(env HOME)/marble/scripts/filter.launch">
+    <arg name="robot_name" value="X3" />
+  </include>
+
+  <include file="$(env HOME)/marble/scripts/filter.launch">
+    <arg name="robot_name" value="X4" />
+  </include>
 
   <!-- Start Octomap -->
   <include file="$(env HOME)/marble/scripts/octomap.launch">
     <arg name="robot_name" value="X1" />
-    <!-- <arg name="frame_id" value="world" /> -->
   </include>
 
   <include file="$(env HOME)/marble/scripts/octomap.launch">
     <arg name="robot_name" value="X2" />
-    <!-- <arg name="frame_id" value="world2" /> -->
-    <!-- <arg name="resolution" value="0.1" /> -->
+  </include>
+
+  <include file="$(env HOME)/marble/scripts/octomap.launch">
+    <arg name="robot_name" value="X3" />
+  </include>
+
+  <include file="$(env HOME)/marble/scripts/octomap.launch">
+    <arg name="robot_name" value="X4" />
   </include>
 
   <!-- Start Rviz and load config -->
