@@ -1,0 +1,2 @@
+#!/bin/bash
+roslaunch marble_gui marble_gui.launch
