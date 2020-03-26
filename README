@@ -1,23 +1,78 @@
-To start the basic scenario:
+Place all files in ~/marble/scripts
+Add this directory to your path for easy execution.
+The scripts expect the catkin workspace in ~/catkin.  Find and replace if named differently.
+
+Quickstart with default setup (4 separate terminals, but can run all in one if desired):
+
+>> marble start
+>> marble map
+>> marble multiagent
+>> marble explore_frontier
+
+If a robot needs a nudge:
+
+>> roskeys X1
+
+
+----------------------------------------------------------------------------------------
+To start the basic scenario in the cave environment:
 
 >> marble start
 
-To stop:
+This starts Ignition, loads the environment, two robots and the base station, comms, and RVIZ.
+
+To stop all nodes (including others started manually as below):
 
 >> marble stop
 
 This can be done in the terminal you ran from, even though text is scrolling by.  Or run from another terminal.
 
-To move a vehicle:
+To use other environments use:
 
->> roskeys.sh X1
+>> marble start urban
+or
+>> marble start tunnel
 
-Where X1 can be X1, X2, etc.
+To use a different map than the default, add to the command such as:
 
+>> marble start cave simple_cave_01
+
+
+----------------------------------------------------------------------------------------
+By default map merging and multiagent do run at startup, but can be uncommented.  To run separately:
+
+>> marble map
+>> marble multiagent
+
+Each can be stopped separately as well:
+
+>> marble stop map
+>> marble stop multiagent
+
+
+----------------------------------------------------------------------------------------
 To start guidance:
 
->> marble explore
+>> marble explore_frontier
 
 To stop guidance without stopping the rest of the simulation:
 
->> marble stop explore
+>> marble stop explore_frontier
+
+
+----------------------------------------------------------------------------------------
+To move a robot manually:
+
+>> roskeys X1
+
+Where X1 can be X1, X2, etc.
+
+
+-----UNSUPPORTED-----
+
+----------------------------------------------------------------------------------------
+To use beacons, change enable_beacons to 1 in the marble file.  Currently, the robots_ign.launch will need to be edited to enable the _control for each beacon, and they need to be added to the ign launch line in 'marble', which may or may not work!
+
+
+----------------------------------------------------------------------------------------
+To use 4 robots, run marble4 and edit the associated files.  This is currently only partially supported with Gazebo.

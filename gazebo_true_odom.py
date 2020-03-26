@@ -1,24 +1,16 @@
 #!/usr/bin/env python
 import sys
 import rospy
-import tf
 from nav_msgs.msg import Odometry
+from gazebo_msgs.srv import GetLinkState
 
-class TransformToOdometry:
-    def getTransform(self):
-        try:
-            (trans, rot) = self.listener.lookupTransform(self.Odometry.header.frame_id, self.Odometry.child_frame_id, rospy.Time(0))
-        except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
-            return 
-        
-        self.Odometry.pose.pose.position.x = trans[0]
-        self.Odometry.pose.pose.position.y = trans[1]
-        self.Odometry.pose.pose.position.z = trans[2]
-        
-        self.Odometry.pose.pose.orientation.x = rot[0]
-        self.Odometry.pose.pose.orientation.y = rot[1]
-        self.Odometry.pose.pose.orientation.z = rot[2]
-        self.Odometry.pose.pose.orientation.w = rot[3]
+
+class LinkStateToOdometry:
+    def getLinkState(self):  # Position subscriber callback function
+        XX_state = self.gazebo_link_state(self.link_name, 'world')
+        self.Odometry.pose.pose = XX_state.link_state.pose
+        self.Odometry.twist.twist = XX_state.link_state.twist
+        self.Odometry.pose.pose.position.z += 0.4
 
         # Add time stamp
         self.Odometry.header.stamp = rospy.Time.now()
@@ -26,11 +18,10 @@ class TransformToOdometry:
         return
 
     def start(self):
-        rate = rospy.Rate(10.0)  # 50Hz
-
+        rate = rospy.Rate(50.0)  # 50Hz
         while not rospy.is_shutdown():
             rate.sleep()
-            self.getTransform()
+            self.getLinkState()
             self.pub1.publish(self.Odometry)
         return
 
@@ -39,7 +30,7 @@ class TransformToOdometry:
         node_name = topic_name + "_" + robot_name
         rospy.init_node(node_name)
 
-        self.listener = tf.TransformListener()
+        self.link_name = robot_name + "::" + robot_name + "/" + link_name
         self.pubTopic1 = "/" + robot_name + "/" + topic_name
         self.pub1 = rospy.Publisher(self.pubTopic1, Odometry, queue_size=10)
 
@@ -49,9 +40,13 @@ class TransformToOdometry:
         self.Odometry.header.frame_id = frame
         self.Odometry.child_frame_id = child_frame
 
+        # Initialize Gazebo LinkState service
+        rospy.wait_for_service('/gazebo/get_link_state')
+        self.gazebo_link_state = rospy.ServiceProxy('/gazebo/get_link_state', GetLinkState, persistent=True)
+
 
 if __name__ == '__main__':
-    publish_tool = TransformToOdometry(robot_name=sys.argv[1], child_frame=sys.argv[1] + "/base_link")
+    publish_tool = LinkStateToOdometry(robot_name=sys.argv[1], child_frame=sys.argv[1] + "/base_link")
 
     try:
         publish_tool.start()

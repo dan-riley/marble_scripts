@@ -2,24 +2,31 @@
 <launch>
   <!-- Load the environment and Gazebo -->
   <arg name="debug" default="false"/>
+  <arg name="use_ign" default="true"/>
   <arg name="scenario" default="tunnel_practice_2"/>
   <arg name="extra_gazebo_args" default=""/>
 
-  <param name="subt/gazebo_worlds_dir" value="$(find subt_gazebo)/worlds/" />
+  <group if="$(arg use_ign)">
+    <include file="$(env HOME)/marble/scripts/robots_ign.launch" />
+  </group>
 
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name"
-         value="$(find subt_gazebo)/worlds/$(arg scenario).world" />
-    <arg name="paused" value="false"/>
-    <arg name="use_sim_time" value="true"/>
-    <arg name="gui" value="false"/>
-    <arg name="headless" value="false"/>
-    <arg name="debug" value="$(arg debug)"/>
-    <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args) --verbose"/>
-  </include>
+  <group unless="$(arg use_ign)">
+    <param name="subt/gazebo_worlds_dir" value="$(find subt_gazebo)/worlds/" />
 
-  <!-- Load our robots.  May want to add parameters to decide which robots. -->
-  <include file="$(env HOME)/marble/scripts/robots_$(arg scenario).launch" />
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name"
+           value="$(find subt_gazebo)/worlds/$(arg scenario).world" />
+      <arg name="paused" value="false"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="gui" value="false"/>
+      <arg name="headless" value="false"/>
+      <arg name="debug" value="$(arg debug)"/>
+      <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args) --verbose"/>
+    </include>
+
+    <!-- Load our robots.  May want to add parameters to decide which robots. -->
+    <include file="$(env HOME)/marble/scripts/robots_$(arg scenario).launch" />
+  </group>
 
   <!-- Start Voxblox.  May want to add parameter to launch either voxblox or octomap. -->
   <!-- <include file="$(env HOME)/marble/scripts/voxblox.launch"> -->
@@ -51,7 +58,4 @@
     <!-- <arg name="resolution" value="0.1" /> -->
   </include>
 
-  <!-- Start Rviz and load config -->
-  <!-- <node pkg="rviz" type="rviz" name="marble_visualization" args="&#45;d $(env HOME)/marble/scripts/marble.rviz" /> -->
-  <!-- <node pkg="rviz" type="rviz" name="marble_anchor_visualization" args="&#45;d $(env HOME)/marble/scripts/anchor.rviz" /> -->
 </launch>
