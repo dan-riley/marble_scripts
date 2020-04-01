@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.6">
+  <model name="marble_beacon">
+    <link name="base_link">
+      <pose frame="">0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <mass>4.064</mass>
+        <inertia>
+          <ixx>0.615397</ixx>
+          <ixy>-0.0240585</ixy>
+          <ixz>-0.120749</ixz>
+          <iyy>1.75388</iyy>
+          <iyz>-0.0028322</iyz>
+          <izz>2.03641</izz>
+        </inertia>
+      </inertial>
+      <collision name="base_link_fixed_joint_lump__velodyne_base_link_collision_5">
+        <pose frame="">0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.717</length>
+            <radius>0.0516</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="base_link_fixed_joint_lump__velodyne_base_link_visual_10">
+        <pose frame="">0 0 -0.25 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 5</scale>
+            <uri>meshes/VLP16_base_1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name="base_link_fixed_joint_lump__velodyne_base_link_visual_11">
+        <pose frame="">0 0 -0.25 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 5</scale>
+            <uri>meshes/VLP16_base_2.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name="base_link_fixed_joint_lump__velodyne_visual_12">
+        <pose frame="">0 0 -0.25 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 5</scale>
+            <uri>meshes/VLP16_scan.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <velocity_decay/>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <kinematic>0</kinematic>
+      <gravity>1</gravity>
+      <velocity_decay/>
+    </link>
+    <static>0</static>
+  </model>
+</sdf>
+
