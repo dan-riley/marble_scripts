@@ -141,6 +141,9 @@ elif [ "$1" == "stop" ]; then
     rosnode kill Base/multi_agent
     rosnode kill X1/multi_agent
     rosnode kill X2/multi_agent
+    rosnode kill Base/get_map_diffs
+    rosnode kill X1/get_map_diffs
+    rosnode kill X2/get_map_diffs
     if $enable_beacons1; then
       rosnode kill B01/multi_agent
       rosnode kill B02/multi_agent
@@ -205,10 +208,10 @@ elif [ "$1" == "explore_graph" ]; then
 
 elif [ "$1" == "map" ]; then
   echo "Starting MARBLE Map Merge nodes..."
-  # roslaunch octomap_merger octomap_merger_sim.launch vehicle:=Base type:=base full_merge:=true free_prioritize:=false &
-  roslaunch octomap_merger octomap_merger_sim.launch vehicle:=X1 &
-  roslaunch octomap_merger octomap_merger_sim.launch vehicle:=X2 resolution:=0.2 &
-  # roslaunch octomap_merger octomap_merger_sim.launch vehicle:=B01 type:=beacon &
+  # roslaunch marble_octomap_merger octomap_merger_sim.launch vehicle:=Base type:=base full_merge:=true free_prioritize:=false &
+  roslaunch marble_octomap_merger octomap_merger_sim.launch vehicle:=X1 &
+  roslaunch marble_octomap_merger octomap_merger_sim.launch vehicle:=X2 resolution:=0.2 &
+  # roslaunch marble_octomap_merger octomap_merger_sim.launch vehicle:=B01 type:=beacon &
 
 elif [ "$1" == "multiagent" ]; then
   echo "Starting MARBLE Multi-Agent nodes..."
