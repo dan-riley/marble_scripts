@@ -134,7 +134,6 @@ elif [ "$1" == "stop" ]; then
     rosnode kill Base/octomap_merger
     rosnode kill X1/octomap_merger
     rosnode kill X2/octomap_merger
-    rosnode kill B01/octomap_merger
   elif [ "$2" == "multiagent" ]; then
     echo "Stopping MARBLE Multi-Agent nodes..."
     # kill -9 $(pgrep -f 'python2.*multi_agent.py')
@@ -208,17 +207,16 @@ elif [ "$1" == "explore_graph" ]; then
 
 elif [ "$1" == "map" ]; then
   echo "Starting MARBLE Map Merge nodes..."
-  # roslaunch marble_octomap_merger octomap_merger_sim.launch vehicle:=Base type:=base full_merge:=true free_prioritize:=false &
-  roslaunch marble_octomap_merger octomap_merger_sim.launch vehicle:=X1 &
-  roslaunch marble_octomap_merger octomap_merger_sim.launch vehicle:=X2 resolution:=0.2 &
-  # roslaunch marble_octomap_merger octomap_merger_sim.launch vehicle:=B01 type:=beacon &
+  roslaunch octomap_merger octomap_merger_sim.launch vehicle:=Base type:=base fullMerge:=true publishMergedPCL:=false publishDiffPCL:=true &
+  roslaunch octomap_merger octomap_merger_sim.launch vehicle:=X1 &
+  roslaunch octomap_merger octomap_merger_sim.launch vehicle:=X2 resolution:=0.2 &
 
 elif [ "$1" == "multiagent" ]; then
   echo "Starting MARBLE Multi-Agent nodes..."
   roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=Base type:=base &
-  roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X1 myBeacons:="B01" delayDrop:=False &
+  roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X1 myBeacons:="" delayDrop:=False &
   # roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X1 myBeacons:="B01,B02,B03,B04" delayDrop:=False &
-  roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X2 myBeacons:="B02" &
+  roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X2 myBeacons:="" &
   # roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X2 myBeacons:="B05,B06,B07,B08" &
   if $enable_beacons1; then
     roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=B01 type:=beacon &
