@@ -4,6 +4,7 @@
   <arg name="anchor_name" default="Base" />
   <arg name="x1_name" default="X1" />
   <arg name="x2_name" default="X2" />
+  <arg name="a1_name" default="A01" />
   <arg name="b1_name" default="B01" />
   <arg name="b2_name" default="B02" />
   <arg name="b3_name" default="B03" />
@@ -12,6 +13,7 @@
   <arg name="b6_name" default="B06" />
   <arg name="b7_name" default="B07" />
   <arg name="b8_name" default="B08" />
+  <arg name="air" default="false" />
   <arg name="beacons1" default="false" />
   <arg name="beacons2" default="false" />
 
@@ -30,6 +32,10 @@
     <node name="$(arg b6_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b6_name) $(arg b6_name)" />
     <node name="$(arg b7_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b7_name) $(arg b7_name)" />
     <node name="$(arg b8_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b8_name) $(arg b8_name)" />
+  </group>
+
+  <group if="$(arg air)">
+    <node name="$(arg a1_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg a1_name) $(arg a1_name)" />
   </group>
 
   <node name="$(arg x1_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg x1_name) $(arg x1_name)" />

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="vehicle" default="X1" />
+  <arg name="resolution" default="0.2" />
+
+  <group ns="$(arg vehicle)">
+    <include file="$(find msfm3d)/launch/planning_and_control.launch">
+      <arg name="resolution" value="$(arg resolution)" />
+    </include>
+
+    <include file="$(find nearness_control)/launch/sim/launch_sim_low_level_control.launch">
+      <arg name="vehicle" value="$(arg vehicle)" />
+      <arg name="motion_on_startup" value="1" />
+    </include>
+  </group>
+</launch>

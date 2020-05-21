@@ -5,7 +5,7 @@
   <arg name="resolution" default="0.2" />
 
   <!-- <node ns="$(arg robot_name)" pkg="octomap_server" type="octomap_server_node" name="octomap_server"> -->
-  <node ns="$(arg robot_name)" pkg="marble_mapping" type="marble_mapping_node" name="marble_mapping" output="screen">
+  <node ns="$(arg robot_name)" pkg="octomap_server" type="octomap_server_node" name="octomap_server" output="screen">
     <param name="resolution" value="$(arg resolution)" />
 
     <!-- fixed map frame (set to 'map' if SLAM or localization running!) -->

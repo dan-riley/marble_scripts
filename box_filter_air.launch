@@ -1,0 +1,24 @@
+<launch>
+
+  <arg name="vehicle" default="X1" />
+<!-- PCL Manager -->
+  <node pkg="nodelet" type="nodelet" name="cropbox_filter_pcl_manager" args="manager" output="screen"/>
+
+  <!-- A CropBox filter to avoid self-detection -->
+  <node pkg="nodelet" type="nodelet" name="self_removal" args="load pcl/CropBox cropbox_filter_pcl_manager" output="screen">
+    <remap from="~input" to="points" />
+    <remap from="~output" to="octomap_in" />
+    <param name="input_frame" value="$(arg vehicle)/base_link/front_laser" />
+    <param name="output_frame" value="$(arg vehicle)/base_link/front_laser" />
+    <rosparam>
+      # true: no points in the box, false: no points outside the box
+      negative: true
+      min_x: -0.4
+      max_x: 0.4
+      min_y: -0.4
+      max_y: 0.4
+      min_z: -0.4
+      max_z: 0.4
+    </rosparam>
+  </node>
+</launch>

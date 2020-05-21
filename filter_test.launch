@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="robot_name" default="X2" />
+  <node ns="$(arg robot_name)" pkg="nodelet" type="nodelet" name="pcl_manager" args="manager" output="screen" />
+
+  <!-- Run a passthrough filter to clean NaNs -->
+  <!-- <node ns="$(arg robot_name)" pkg="nodelet" type="nodelet" name="psx" args="load pcl/PassThrough pcl_manager" output="screen"> -->
+  <node ns="$(arg robot_name)" pkg="nodelet" type="nodelet" name="psx" args="load pcl/VoxelGrid pcl_manager" output="screen">
+    <!-- <remap from="~input" to="merged_pc" /> -->
+    <remap from="~input" to="points" />
+    <remap from="~output" to="points_filtered" />
+    <rosparam>
+      <!-- filter_field_name: x -->
+      <!-- filter_limit_min: &#45;500 -->
+      <!-- filter_limit_max: 500 -->
+      <!-- filter_limit_negative: False -->
+      leaf_size: 0.1
+    </rosparam>
+  </node>
+
+  <!-- <node ns="$(arg robot_name)" pkg="nodelet" type="nodelet" name="psy" args="load pcl/PassThrough pcl_manager" output="screen"> -->
+  <!-- <node ns="$(arg robot_name)" pkg="nodelet" type="nodelet" name="psy" args="load pcl/VoxelGrid pcl_manager" output="screen"> -->
+  <!--   <!&#45;&#45; <remap from="~input" to="merged_pc" /> &#45;&#45;> -->
+  <!--   <remap from="~input" to="psx/output" /> -->
+  <!--   <rosparam> -->
+  <!--     filter_field_name: y -->
+  <!--     filter_limit_min: &#45;500 -->
+  <!--     filter_limit_max: 500 -->
+  <!--     filter_limit_negative: False -->
+  <!--     leaf_size: 0.2 -->
+  <!--   </rosparam> -->
+  <!-- </node> -->
+
+  <!-- <node ns="$(arg robot_name)" pkg="nodelet" type="nodelet" name="psz" args="load pcl/PassThrough pcl_manager" output="screen"> -->
+  <!-- <node ns="$(arg robot_name)" pkg="nodelet" type="nodelet" name="psz" args="load pcl/VoxelGrid pcl_manager" output="screen"> -->
+  <!--   <!&#45;&#45; <remap from="~input" to="merged_pc" /> &#45;&#45;> -->
+  <!--   <remap from="~input" to="psy/output" /> -->
+  <!--   <remap from="~output" to="points_filtered" /> -->
+  <!--   <rosparam> -->
+  <!--     filter_field_name: z -->
+  <!--     filter_limit_min: &#45;500 -->
+  <!--     filter_limit_max: 500 -->
+  <!--     filter_limit_negative: False -->
+  <!--     leaf_size: 0.2 -->
+  <!--   </rosparam> -->
+  <!-- </node> -->
+</launch>

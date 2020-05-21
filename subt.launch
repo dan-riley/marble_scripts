@@ -4,12 +4,15 @@
   <arg name="debug" default="false"/>
   <arg name="use_ign" default="true"/>
   <arg name="scenario" default="tunnel_practice_2"/>
+  <arg name="voxblox" default="false"/>
+  <arg name="air" default="false"/>
   <arg name="beacons1" default="false"/>
   <arg name="beacons2" default="false"/>
   <arg name="extra_gazebo_args" default=""/>
 
   <group if="$(arg use_ign)">
     <include file="$(env HOME)/marble/scripts/robots_ign.launch">
+      <arg name="air" value="$(arg air)"/>
       <arg name="beacons1" value="$(arg beacons1)"/>
       <arg name="beacons2" value="$(arg beacons2)"/>
     </include>
@@ -51,16 +54,56 @@
   <!--   <arg name="robot_name" value="X2" /> -->
   <!-- </include> -->
 
+  <include file="$(env HOME)/marble/scripts/box_filter.launch" ns="X1">
+    <arg name="vehicle" value="X1" />
+  </include>
+
+  <include file="$(env HOME)/marble/scripts/box_filter.launch" ns="X2">
+    <arg name="vehicle" value="X2" />
+  </include>
+
   <!-- Start Octomap -->
-  <include file="$(env HOME)/marble/scripts/octomap.launch">
-    <arg name="robot_name" value="X1" />
+  <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="X1">
+    <!-- <arg name="frame_id" value="world" /> -->
+    <arg name="cloud_in" value="octomap_in" />
+    <arg name="max_range" value="5.0" />
+  </include>
+
+  <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="X2">
+    <!-- <arg name="frame_id" value="world2" /> -->
+    <!-- <arg name="resolution" value="0.1" /> -->
+    <arg name="cloud_in" value="octomap_in" />
+    <arg name="max_range" value="5.0" />
+  </include>
+
+  <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="Base">
     <!-- <arg name="frame_id" value="world" /> -->
   </include>
 
-  <include file="$(env HOME)/marble/scripts/octomap.launch">
-    <arg name="robot_name" value="X2" />
-    <!-- <arg name="frame_id" value="world2" /> -->
-    <!-- <arg name="resolution" value="0.1" /> -->
-  </include>
+  <group if="$(arg air)" ns="A01">
+    <include file="$(env HOME)/marble/scripts/box_filter_air.launch">
+      <arg name="vehicle" value="A01" />
+    </include>
 
+    <!-- <node name="relay_ouster" type="relay" pkg="topic_tools" args="octomap_in vb_cloud"/> -->
+    <!-- <node name="relay_up_pico_flexx" type="relay" pkg="topic_tools" args="tof_top/depth/points vb_cloud"/> -->
+    <!-- <node name="relay_down_pico_flexx" type="relay" pkg="topic_tools" args="tof_bottom/depth/points vb_cloud"/> -->
+
+    <!-- <node name="relay_ouster" type="relay" pkg="topic_tools" args="points"/> -->
+    <node name="relay_up_pico_flexx" type="relay" pkg="topic_tools" args="tof_top/depth/points points"/>
+    <node name="relay_down_pico_flexx" type="relay" pkg="topic_tools" args="tof_bottom/depth/points points"/>
+
+
+    <include file="$(find marble_mapping)/launch/marble_mapping.launch">
+      <!-- <arg name="frame_id" value="world" /> -->
+      <!-- <arg name="cloud_in" value="vb_cloud" /> -->
+      <arg name="cloud_in" value="octomap_in" />
+      <arg name="max_range" value="10.0" />
+    </include>
+
+    <group if="$(arg voxblox)">
+      <include file="$(env HOME)/marble/scripts/voxblox_air.launch">
+      </include>
+    </group>
+  </group>
 </launch>

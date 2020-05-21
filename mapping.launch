@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Start Octomap -->
+  <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="X1">
+    <!-- <arg name="frame_id" value="world" /> -->
+  </include>
+
+  <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="X2">
+    <!-- <arg name="frame_id" value="world2" /> -->
+    <!-- <arg name="resolution" value="0.1" /> -->
+  </include>
+
+  <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="Base">
+    <!-- <arg name="frame_id" value="world" /> -->
+  </include>
+
+</launch>
