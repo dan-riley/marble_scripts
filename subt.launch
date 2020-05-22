@@ -5,6 +5,7 @@
   <arg name="use_ign" default="true"/>
   <arg name="scenario" default="tunnel_practice_2"/>
   <arg name="voxblox" default="false"/>
+  <arg name="ground" default="true"/>
   <arg name="air" default="false"/>
   <arg name="beacons1" default="false"/>
   <arg name="beacons2" default="false"/>
@@ -12,6 +13,7 @@
 
   <group if="$(arg use_ign)">
     <include file="$(env HOME)/marble/scripts/robots_ign.launch">
+      <arg name="ground" value="$(arg ground)"/>
       <arg name="air" value="$(arg air)"/>
       <arg name="beacons1" value="$(arg beacons1)"/>
       <arg name="beacons2" value="$(arg beacons2)"/>
@@ -54,27 +56,29 @@
   <!--   <arg name="robot_name" value="X2" /> -->
   <!-- </include> -->
 
-  <include file="$(env HOME)/marble/scripts/box_filter.launch" ns="X1">
-    <arg name="vehicle" value="X1" />
-  </include>
+  <group if="$(arg ground)">
+    <include file="$(env HOME)/marble/scripts/box_filter.launch" ns="X1">
+      <arg name="vehicle" value="X1" />
+    </include>
 
-  <include file="$(env HOME)/marble/scripts/box_filter.launch" ns="X2">
-    <arg name="vehicle" value="X2" />
-  </include>
+    <include file="$(env HOME)/marble/scripts/box_filter.launch" ns="X2">
+      <arg name="vehicle" value="X2" />
+    </include>
 
-  <!-- Start Octomap -->
-  <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="X1">
-    <!-- <arg name="frame_id" value="world" /> -->
-    <arg name="cloud_in" value="octomap_in" />
-    <arg name="max_range" value="5.0" />
-  </include>
+    <!-- Start Octomap -->
+    <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="X1">
+      <!-- <arg name="frame_id" value="world" /> -->
+      <arg name="cloud_in" value="octomap_in" />
+      <arg name="max_range" value="5.0" />
+    </include>
 
-  <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="X2">
-    <!-- <arg name="frame_id" value="world2" /> -->
-    <!-- <arg name="resolution" value="0.1" /> -->
-    <arg name="cloud_in" value="octomap_in" />
-    <arg name="max_range" value="5.0" />
-  </include>
+    <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="X2">
+      <!-- <arg name="frame_id" value="world2" /> -->
+      <!-- <arg name="resolution" value="0.1" /> -->
+      <arg name="cloud_in" value="octomap_in" />
+      <arg name="max_range" value="5.0" />
+    </include>
+  </group>
 
   <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="Base">
     <!-- <arg name="frame_id" value="world" /> -->

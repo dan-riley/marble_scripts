@@ -4,6 +4,7 @@
 # Whether to use Ignition or Gazebo
 use_ign=true
 
+enable_ground=true
 enable_air=false
 enable_voxblox=false
 # Both false = No beacons; beacons1 = B01 and B02; beacons2 = B03 - B08
@@ -13,10 +14,15 @@ enable_beacons2=false
 if [ "$1" == "start" ]; then
   echo "Starting MARBLE services..."
 
+  # Disable the ground vehicle and turn on air mode
+  if [ "$2" == "air_only" ]; then
+    enable_ground=false
+  fi
+
   # Default to using the cave environment
   if [ "$2" == "" ]; then
     world="cave"
-  elif [ "$2" == "air" ]; then
+  elif [ "$2" == "air" ] || [ "$2" == "air_only" ]; then
     enable_air=true
     if [ "$3" == "" ]; then
       world="cave"
@@ -50,13 +56,17 @@ if [ "$1" == "start" ]; then
 
     # Overwrite the world name if it was passed by command line
     scenario_check=$3
-    if [ "$2" == "air" ]; then
+    if [ "$2" == "air" ] || [ "$2" == "air_only" ]; then
       scenario_check=$4
     fi
     if [ $scenario_check != "" ]; then
       scenario=$scenario_check
     fi
 
+    ground=""
+    if $enable_ground; then
+      ground="robotName1:=X1 robotConfig1:=marble_husky_lite robotName2:=X2 robotConfig2:=marble_husky_lite"
+    fi
     air=""
     if $enable_air; then
       air="robotName4:=A01 robotConfig4:=marble_qav500_lite"
@@ -71,7 +81,7 @@ if [ "$1" == "start" ]; then
     fi
     # Launch Ignition
     # ign launch $ignlaunch worldName:=$scenario robotName1:=X1 robotConfig1:=marble_husky_sensor_config_1 robotName2:=X2 robotConfig2:=marble_husky_sensor_config_1 robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1 enableGroundTruth:=1 localModel:=true &
-    ign launch $ignlaunch worldName:=$scenario robotName1:=X1 robotConfig1:=marble_husky_lite robotName2:=X2 robotConfig2:=marble_husky_lite robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1 $air $beacons enableGroundTruth:=1 localModel:=true &
+    ign launch $ignlaunch worldName:=$scenario $ground robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1 $air $beacons enableGroundTruth:=1 localModel:=true &
     # ign launch $ignlaunch worldName:=$scenario robotName1:=X1 robotConfig1:=X1_SENSOR_CONFIG_4 robotName2:=X2 robotConfig2:=X1_SENSOR_CONFIG_4 robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1  enableGroundTruth:=1 $beacons localModel:=true &
     # ign launch $ignlaunch worldName:=$scenario robotName1:=X1 robotConfig1:=marble_husky_lite robotName2:=X2 robotConfig2:=SSCI_X4_SENSOR_CONFIG_1 robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1 enableGroundTruth:=1 localModel:=true &
     sleep 10
@@ -92,7 +102,7 @@ if [ "$1" == "start" ]; then
   fi
 
   # Run our launch file
-  roslaunch ~/marble/scripts/subt.launch use_ign:=$use_ign scenario:=$scenario voxblox:=$enable_voxblox air:=$enable_air beacons1:=$enable_beacons1 beacons2:=$enable_beacons2 &
+  roslaunch ~/marble/scripts/subt.launch use_ign:=$use_ign scenario:=$scenario voxblox:=$enable_voxblox ground:=$enable_ground air:=$enable_air beacons1:=$enable_beacons1 beacons2:=$enable_beacons2 &
   sleep 10
 
   # Run the python scripts
@@ -102,26 +112,35 @@ if [ "$1" == "start" ]; then
     python2 ~/marble/scripts/world_to_bot_tf.py &
   fi
   # Odometry correction
-  python2 ~/marble/scripts/subt_true_odom.py X1 &
-  python2 ~/marble/scripts/subt_true_odom.py X2 &
+  if $enable_ground; then
+    python2 ~/marble/scripts/subt_true_odom.py X1 &
+    python2 ~/marble/scripts/subt_true_odom.py X2 &
+  fi
 
   if $enable_air; then
     python2 ~/marble/scripts/subt_true_odom.py A01 &
   fi
 
   # Start comms
+  ground_comm=""
+  if $enable_ground; then
+    ground_comm="X1 X2"
+  fi
+
   air_comm=""
   if $enable_air; then
     air_comm="A01"
   fi
 
   if $enable_beacons2; then
-    python2 ~/catkin/src/marble_multi_agent/src/comms_sim_handler.py Base B01 B02 B03 B04 B05 B06 B07 B08 X1 X2 $air_comm &
+    beacon_comm="B01 B02 B03 B04 B05 B06 B07 B08"
   elif $enable_beacons1; then
-    python2 ~/catkin/src/marble_multi_agent/src/comms_sim_handler.py Base B01 B02 X1 X2 $air_comm &
+    beacon_comm="B01 B02"
   else
-    python2 ~/catkin/src/marble_multi_agent/src/comms_sim_handler.py Base X1 X2 $air_comm &
+    beacon_comm=""
   fi
+
+  python2 ~/catkin/src/marble_multi_agent/src/comms_sim_handler.py Base $beacon_comm $ground_comm $air_comm &
 
   sleep 5
 
@@ -129,7 +148,7 @@ if [ "$1" == "start" ]; then
   # ~/marble/scripts/marble lights
 
   # Start the comms checker
-  ~/marble/scripts/marble commscheck $enable_air
+  ~/marble/scripts/marble commscheck $enable_ground $enable_air $enable_beacons1 $enable_beacons2
 
   # Start Multi-Agent nodes
   # ~/marble/scripts/marble map
@@ -218,7 +237,7 @@ elif [ "$1" == "stop" ]; then
     kill -9 $(pgrep -f 'python2.*world_to_bot_tf.py')
     kill -9 $(pgrep -f 'python2.*subt_true_odom.py')
     kill -9 $(pgrep -f 'python2.*subt_guidance_node.py')
-    kill -9 $(pgrep -f 'ros')
+    # kill -9 $(pgrep -f 'ros')
     killall -HUP gbm_node
   fi
 elif [ "$1" == "explore" ]; then
@@ -261,7 +280,11 @@ elif [ "$1" == "map" ]; then
   fi
 
 elif [ "$1" == "multiagent" ]; then
+  enable_ground=true
   if [ "$2" == "air" ]; then
+    enable_air=true
+  elif [ "$2" == "air_only" ]; then
+    enable_ground=false
     enable_air=true
   fi
 
@@ -272,10 +295,12 @@ elif [ "$1" == "multiagent" ]; then
   fi
 
   roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=Base type:=base $air &
-  roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X1 myBeacons:="" $air delayDrop:=False &
-  # roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X1 myBeacons:="B01,B02,B03,B04" delayDrop:=False &
-  roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X2 myBeacons:="" $air &
-  # roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X2 myBeacons:="B05,B06,B07,B08" &
+  if $enable_ground; then
+    roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X1 myBeacons:="" $air delayDrop:=False &
+    # roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X1 myBeacons:="B01,B02,B03,B04" delayDrop:=False &
+    roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X2 myBeacons:="" $air &
+    # roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X2 myBeacons:="B05,B06,B07,B08" &
+  fi
   if $enable_beacons1; then
     roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=B01 type:=beacon &
     roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=B02 type:=beacon &
@@ -292,16 +317,18 @@ elif [ "$1" == "multiagent" ]; then
 elif [ "$1" == "commscheck" ]; then
   echo "Starting MARBLE Comms Check nodes..."
   python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py Base &
-  python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py X1 &
-  python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py X2 &
-  if $enable_air || [ "$2" == "true" ]; then
+  if $enable_ground || [ "$2" == "true" ]; then
+    python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py X1 &
+    python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py X2 &
+  fi
+  if $enable_air || [ "$3" == "true" ]; then
     python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py A01 &
   fi
-  if $enable_beacons1; then
+  if $enable_beacons1 || $enable_beacons2 || [ "$4" == "true" ]; then
     python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py B01 &
     python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py B02 &
   fi
-  if $enable_beacons2; then
+  if $enable_beacons2 || [ "$5" == "true" ]; then
     python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py B03 &
     python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py B04 &
     python2 ~/catkin/src/marble_multi_agent/src/comms_sim_checker.py B05 &
