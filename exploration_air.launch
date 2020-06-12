@@ -5,6 +5,9 @@
   <arg name="voxblox" default="false" />
 
   <group ns="$(arg vehicle)">
+    <!-- Take off -->
+    <node pkg="rostopic" type="rostopic" name="takeoff" args="pub /$(arg vehicle)/cmd_vel geometry_msgs/Twist -1 -- '[0, 0, 1]' '[0, 0, 0]'" />
+
     <group if="$(arg voxblox)">
       <include file="$(find msfm3d)/launch/msfm3d_ma_air_voxblox.launch">
         <arg name="resolution" value="$(arg resolution)" />
@@ -18,7 +21,10 @@
       </include>
     </group>
 
-    <include file="$(find marble_guidance)/launch/guidance_air.launch">
+    <!-- Delay guidance node so the aircraft takes off far enough -->
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+      <arg name="time" value="3" />
+      <arg name="file" value="$(find marble_guidance)/launch/guidance_air.launch" />
     </include>
   </group>
 </launch>

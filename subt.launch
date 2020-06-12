@@ -80,7 +80,7 @@
     </include>
   </group>
 
-  <include file="$(find marble_mapping)/launch/marble_mapping.launch" ns="Base">
+  <include file="$(find marble_mapping)/launch/marble_mapping_base.launch" ns="Base">
     <!-- <arg name="frame_id" value="world" /> -->
   </include>
 

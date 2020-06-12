@@ -59,13 +59,13 @@ if [ "$1" == "start" ]; then
     if [ "$2" == "air" ] || [ "$2" == "air_only" ]; then
       scenario_check=$4
     fi
-    if [ $scenario_check != "" ]; then
+    if [ "$scenario_check" != "" ]; then
       scenario=$scenario_check
     fi
 
     ground=""
     if $enable_ground; then
-      ground="robotName1:=X1 robotConfig1:=marble_husky_lite robotName2:=X2 robotConfig2:=marble_husky_lite"
+      ground="robotName2:=X1 robotConfig2:=marble_husky_lite robotName3:=X2 robotConfig3:=marble_husky_lite"
     fi
     air=""
     if $enable_air; then
@@ -81,7 +81,7 @@ if [ "$1" == "start" ]; then
     fi
     # Launch Ignition
     # ign launch $ignlaunch worldName:=$scenario robotName1:=X1 robotConfig1:=marble_husky_sensor_config_1 robotName2:=X2 robotConfig2:=marble_husky_sensor_config_1 robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1 enableGroundTruth:=1 localModel:=true &
-    ign launch $ignlaunch worldName:=$scenario $ground robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1 $air $beacons enableGroundTruth:=1 localModel:=true &
+    ign launch $ignlaunch worldName:=$scenario robotName1:=Base robotConfig1:=TEAMBASE $ground $air $beacons enableGroundTruth:=1 localModel:=true &
     # ign launch $ignlaunch worldName:=$scenario robotName1:=X1 robotConfig1:=X1_SENSOR_CONFIG_4 robotName2:=X2 robotConfig2:=X1_SENSOR_CONFIG_4 robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1  enableGroundTruth:=1 $beacons localModel:=true &
     # ign launch $ignlaunch worldName:=$scenario robotName1:=X1 robotConfig1:=marble_husky_lite robotName2:=X2 robotConfig2:=SSCI_X4_SENSOR_CONFIG_1 robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1 enableGroundTruth:=1 localModel:=true &
     sleep 10
@@ -225,6 +225,7 @@ elif [ "$1" == "stop" ]; then
     rosnode kill -a
     killall -9 gzserver
     killall -9 rosmaster
+    kill -9 $(pgrep -f 'terrain')
     kill -9 $(pgrep -f 'ros_ign')
     kill -9 $(pgrep -f 'roslaunch')
     kill -9 $(pgrep -f 'ign launch')
@@ -237,7 +238,7 @@ elif [ "$1" == "stop" ]; then
     kill -9 $(pgrep -f 'python2.*world_to_bot_tf.py')
     kill -9 $(pgrep -f 'python2.*subt_true_odom.py')
     kill -9 $(pgrep -f 'python2.*subt_guidance_node.py')
-    # kill -9 $(pgrep -f 'ros')
+    kill -9 $(pgrep -f 'subt_ros')
     killall -HUP gbm_node
   fi
 elif [ "$1" == "explore" ]; then

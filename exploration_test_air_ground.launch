@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="resolution" default="0.2" />
+  <arg name="delay1" default="300" />
+  <arg name="delay2" default="420" />
+
+  <include file="$(env HOME)/marble/scripts/rosbag.launch">
+    <arg name="folder" value="$(env HOME)/tests/air_ground_coord" />
+    <arg name="prefix" value="agc-8-air-ground-yes" />
+    <arg name="duration" value="25m" />
+  </include>
+
+  <include file="$(env HOME)/marble/scripts/exploration_air.launch">
+    <arg name="vehicle" value="A01" />
+  </include>
+
+  <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+    <arg name="time" value="$(arg delay1)" />
+    <arg name="userostime" value="true" />
+    <arg name="file" value="$(env HOME)/marble/scripts/exploration_ground.launch" />
+    <arg name="value" value="vehicle:=X2 resolution:=$(arg resolution)" />
+  </include>
+
+  <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+    <arg name="time" value="$(arg delay2)" />
+    <arg name="userostime" value="true" />
+    <arg name="file" value="$(env HOME)/marble/scripts/exploration_ground.launch" />
+    <arg name="value" value="vehicle:=X1 resolution:=$(arg resolution)" />
+  </include>
+</launch>

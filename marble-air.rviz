@@ -347,14 +347,14 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: octomap_rviz_plugin/OccupancyGrid
-      Enabled: true
+      Enabled: false
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
       Min. Height Display: -3.4028234663852886e+38
       Name: X2 Merged Map
       Octomap Topic: /X2/merged_map
       Queue Size: 5
-      Value: true
+      Value: false
       Voxel Alpha: 1
       Voxel Coloring: Z-Axis
       Voxel Rendering: Occupied Voxels
@@ -824,6 +824,14 @@ Visualization Manager:
       Show Visual Aids: false
       Update Topic: /gui_god/update
       Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /A01/merged_map_markers
+      Name: MarkerArray
+      Namespaces:
+        map: true
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -852,25 +860,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 24.946882247924805
+      Distance: 29.529434204101562
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 3.8877768516540527
-        Y: 0.14029443264007568
-        Z: 3.872851266351063e-6
+        X: 3.657989978790283
+        Y: -2.3514885902404785
+        Z: 5.780199899163563e-6
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6847970485687256
+      Pitch: 0.7647969722747803
       Target Frame: <Fixed Frame>
       Value: XYOrbit (rviz)
-      Yaw: 3.425398111343384
+      Yaw: 3.3053958415985107
     Saved: ~
 Window Geometry:
   Displays:
@@ -888,5 +896,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1433
-  X: 731
-  Y: 256
+  X: 1821
+  Y: 261

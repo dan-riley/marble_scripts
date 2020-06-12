@@ -1,0 +1,71 @@
+<launch>
+
+  <arg name="folder" default="$(env HOME)" />
+  <arg name="prefix" default="rosbag" />
+  <arg name="duration" default="20m" />
+
+  <!-- Record Output Data  -->
+  <node pkg="rosbag" type="record" name="rosbag_sim" output="screen"
+    args=" --duration=$(arg duration) --buffsize 0 --output-prefix $(arg folder)/$(arg prefix)
+    /Base/ma_data
+    /X1/artifact_array
+    /X1/cmd_vel
+    /X1/octomap_binary
+    /X1/merged_map
+    /X1/camera_map
+    /X1/camera_view
+    /X1/frontier
+    /X1/lookahead_point
+    /X1/nearest_frontier
+    /X1/frontier_goal_pose
+    /X1/goal_array
+    /X1/planned_path
+    /X1/ma_goal_path
+    /X1/ma_goal
+    /X1/ma_data
+    /X1/odometry
+    /X1/estop_cmd
+    /X1/odometry
+    /X1/task
+    /X2/artifact_array
+    /X2/cmd_vel
+    /X2/octomap_binary
+    /X2/merged_map
+    /X2/camera_map
+    /X2/camera_view
+    /X2/frontier
+    /X2/lookahead_point
+    /X2/nearest_frontier
+    /X2/frontier_goal_pose
+    /X2/goal_array
+    /X2/planned_path
+    /X2/ma_goal_path
+    /X2/ma_goal
+    /X2/ma_data
+    /X2/odometry
+    /X2/estop_cmd
+    /X2/odometry
+    /X2/task
+    /A01/artifact_array
+    /A01/cmd_vel
+    /A01/octomap_binary
+    /A01/merged_map
+    /A01/camera_map
+    /A01/camera_view
+    /A01/frontier
+    /A01/lookahead_point
+    /A01/nearest_frontier
+    /A01/frontier_goal_pose
+    /A01/goal_array
+    /A01/planned_path
+    /A01/ma_goal_path
+    /A01/ma_goal
+    /A01/ma_data
+    /A01/odometry
+    /A01/estop_cmd
+    /A01/odometry
+    /A01/task
+    ">
+  </node>
+
+</launch>
