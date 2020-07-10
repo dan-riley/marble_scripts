@@ -1,7 +1,11 @@
 <?xml version="1.0" ?>
 <launch>
-  <node pkg="rviz" type="rviz" name="marble_gui" args="-d $(env HOME)/base_station/multi_agent.rviz" />
-  <node pkg="rviz" type="rviz" name="marble_h01" args="-d $(env HOME)/base_station/h01.rviz" />
-  <node pkg="rviz" type="rviz" name="marble_t01" args="-d $(env HOME)/base_station/t01.rviz" />
-
+  <include file="$(find odom_to_tf)/launch/multi_base.launch" />
+  <node pkg="rviz" type="rviz" name="marble_gui" args="-d $(env HOME)/base_station/multi_agent.rviz" respawn="true" />
+  <node pkg="rviz" type="rviz" name="marble_h01" args="-d $(env HOME)/base_station/h01.rviz" respawn="true" />
+  <!-- <node pkg="rviz" type="rviz" name="marble_t01" args="&#45;d $(env HOME)/base_station/t01.rviz" respawn="true" /> -->
+  <!-- <node pkg="rviz" type="rviz" name="marble_l01" args="&#45;d $(env HOME)/base_station/l01.rviz" respawn="true" /> -->
+  <!-- <node pkg="rviz" type="rviz" name="marble_a01" args="&#45;d $(env HOME)/base_station/a01.rviz" respawn="true" /> -->
+  <!-- <node pkg="rviz" type="rviz" name="marble_h02" args="&#45;d $(env HOME)/base_station/h02.rviz" respawn="true" /> -->
+  <node pkg="rviz" type="rviz" name="marble_t02" args="-d $(env HOME)/base_station/t02.rviz" respawn="true" />
  </launch>

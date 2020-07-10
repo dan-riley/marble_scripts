@@ -1,2 +1,2 @@
 #!/bin/bash
-roslaunch marble_multi_agent multi_agent_base.launch
+roslaunch marble_multi_agent multi_agent_base.launch useMesh:=true

@@ -1,16 +1,19 @@
 <?xml version="1.0" ?>
 <launch>
-  <include file="$(find octomap_merger)/launch/octomap_merger_base.launch" />
+    <include file="$(find marble_mapping)/launch/marble_mapping_base.launch" ns="Base">
+        <arg name="resolution" value="0.15"/>
+        <arg name="merged_resolution" value="0.15"/>
+    </include>
   <include file="$(find merge_poses_pkg)/launch/merge_poses_ma.launch" />
 
-  <include file="$(find mapping_relay)/launch/test_mapping_relay.launch">
+  <!-- <include file="$(find mapping_relay)/launch/test_mapping_relay.launch"> -->
   <!-- <include file="$(find mapping_relay)/launch/mapping_relay.launch"> -->
     <!-- Safety Research Mine -->
     <!-- Alpha Course -->
     <!-- <arg name="mapping_server_ip" value="10.100.1.201" /> -->
     <!-- Experimental Mine -->
     <!-- Beta Course -->
-  <!--   <!&#45;&#45; <arg name="mapping_server_ip" value="10.100.2.201" /> &#45;&#45;> -->
-  </include>
+    <!-- <arg name="mapping_server_ip" value="10.100.2.201" /> -->
+  <!-- </include> -->
 
  </launch>

@@ -6,10 +6,10 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /H01 Path1/Shape1
-        - /H01 Odom1/Shape1
+        - /T02 Path1/Shape1
+        - /T02 Odom1/Shape1
       Splitter Ratio: 0.5
-    Tree Height: 363
+    Tree Height: 148
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -59,7 +59,7 @@ Visualization Manager:
       Marker Topic: /Base/martifacts
       Name: Artifacts
       Namespaces:
-        {}
+        "": true
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -89,7 +89,7 @@ Visualization Manager:
         Value: true
       Enabled: true
       Keep: 0
-      Name: H01 Path
+      Name: T02 Path
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
@@ -101,7 +101,7 @@ Visualization Manager:
         Shaft Length: 0.30000001192092896
         Shaft Radius: 0.30000001192092896
         Value: Arrow
-      Topic: /Base/neighbors/H01/odometry
+      Topic: /Base/neighbors/T02/odometry
       Unreliable: false
       Value: true
     - Class: octomap_rviz_plugin/OccupancyGrid
@@ -109,8 +109,8 @@ Visualization Manager:
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
       Min. Height Display: -3.4028234663852886e+38
-      Name: H01 Octomap
-      Octomap Topic: /Base/neighbors/H01/map
+      Name: T02 Octomap
+      Octomap Topic: /Base/neighbors/T02/map
       Queue Size: 5
       Value: true
       Voxel Alpha: 1
@@ -135,19 +135,19 @@ Visualization Manager:
         Value: true
       Enabled: true
       Keep: 1
-      Name: H01 Odom
+      Name: T02 Odom
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
         Axes Length: 2
         Axes Radius: 1
-        Color: 252; 233; 79
+        Color: 114; 159; 207
         Head Length: 1
         Head Radius: 1
         Shaft Length: 1
         Shaft Radius: 0.5
         Value: Arrow
-      Topic: /Base/neighbors/H01/odometry
+      Topic: /Base/neighbors/T02/odometry
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -158,11 +158,11 @@ Visualization Manager:
       Enabled: true
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
-      Name: H01 Goal
+      Name: T02 Goal
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /Base/neighbors/H01/goal
+      Topic: /Base/neighbors/T02/goal
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -175,7 +175,7 @@ Visualization Manager:
       Length: 0.30000001192092896
       Line Style: Billboards
       Line Width: 0.10000000149011612
-      Name: H01 Goal Path
+      Name: T02 Goal Path
       Offset:
         X: 0
         Y: 0
@@ -185,7 +185,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /Base/neighbors/H01/path
+      Topic: /Base/neighbors/T02/path
       Unreliable: false
       Value: true
   Enabled: true
@@ -232,7 +232,7 @@ Visualization Manager:
       Name: Current View
       Near Clip Distance: 0.009999999776482582
       Pitch: 1.0753979682922363
-      Target Frame: H01_frame
+      Target Frame: T02_frame
       Value: ThirdPersonFollower (rviz)
       Yaw: 3.245403528213501
     Saved: ~
@@ -253,4 +253,4 @@ Window Geometry:
     collapsed: true
   Width: 747
   X: 4613
-  Y: 0
+  Y: 965

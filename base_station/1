@@ -1,2 +1,3 @@
 #!/bin/bash
-roslaunch marble_common launch_multimaster.launch
+# roslaunch ~/base_station/multimaster.launch
+roslaunch ~/base_station/udpmesh.launch

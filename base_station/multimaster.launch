@@ -1,0 +1,38 @@
+<launch>
+
+  <include file="$(find marble_common)/launch/hosts.launch"/>
+  <arg name="machine" default="$(env ROS_HOSTNAME)"/>
+
+  <node name="master_discovery" pkg="master_discovery_fkie" type="master_discovery" output="screen">
+        <param name = "mcast_group" value="224.0.0.1"/>
+        <param name = "remove_after" value="300"/>
+        <param name = "active_request_after" value="60"/>
+        <param name = "heartbeat_hz" value="2"/>
+  </node>
+
+  <node name="master_sync" pkg="master_sync_fkie" type="master_sync" output="screen">
+        <rosparam param="sync_topics">
+          [
+            '*/estop',
+            '*/estop_cmd',
+            '*/radio_enable_cmd',
+            '*/ma_data',
+            '*/mesh_comm/*',
+            '*/joy_base',
+
+            <!-- '*/origin_detection_status', -->
+            <!-- '*/fake_artifact', -->
+
+            <!-- '*/located_artifact/relay', -->
+            <!-- '*/located_artifact_img/relay', -->
+            <!-- '*/located_artifact_img_only', -->
+            <!-- '*/located_artifact_img_only/relay', -->
+          ]
+        </rosparam>
+        <rosparam param="ignore_topics"> ['/tf', '/tf_static'] </rosparam>
+        <rosparam param="ignore_hosts"> [''] </rosparam>
+        <rosparam param="ignore_nodes"> [''] </rosparam>
+        <rosparam param="resync_on_reconnect_timeout"> 0 </rosparam>
+  </node>
+
+</launch>
