@@ -1,2 +1,4 @@
 #!/bin/bash
-roslaunch marble_gui marble_gui.launch
+source "$HOME/base_station/base_config"
+
+roslaunch marble_gui marble_gui.launch robots:=$MA_NEIGHBORS

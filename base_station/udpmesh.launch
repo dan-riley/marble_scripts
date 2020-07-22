@@ -1,10 +1,8 @@
 <?xml version="1.0" ?>
 <launch>
+  <arg name="mesh_interface" default="enp60s0" />
   <include file="$(find udp_mesh)/launch/rudp_mesh_node.launch">
-    <!-- Wireless -->
-    <!-- <arg name="mesh_interface" value="wlo1" /> -->
-    <!-- Wired -->
-    <arg name="mesh_interface" value="enp60s0" />
+    <arg name="mesh_interface" value="$(arg mesh_interface)" />
     <arg name="mesh_hostname" value="Base" />
     <arg name="topic_list" value="[1|std_msgs/Bool|estop_cmd,
                                    1|std_msgs/Bool|radio_reset_cmd,

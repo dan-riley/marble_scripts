@@ -1,3 +1,10 @@
 #!/bin/bash
-# roslaunch ~/base_station/multimaster.launch
-roslaunch ~/base_station/udpmesh.launch
+source "$HOME/base_station/base_config"
+
+if [ $MA_USEMESH == "true" ]; then
+  echo "Launching UDP Mesh"
+  roslaunch ~/base_station/udpmesh.launch
+else
+  echo "Launching multimaster"
+  roslaunch ~/base_station/multimaster.launch
+fi
