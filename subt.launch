@@ -3,6 +3,7 @@
   <!-- Load the environment and Gazebo -->
   <arg name="debug" default="false"/>
   <arg name="use_ign" default="true"/>
+  <arg name="simcomms" default="true"/>
   <arg name="scenario" default="tunnel_practice_2"/>
   <arg name="voxblox" default="false"/>
   <arg name="ground" default="true"/>
@@ -12,12 +13,14 @@
   <arg name="extra_gazebo_args" default=""/>
 
   <group if="$(arg use_ign)">
-    <include file="$(env HOME)/marble/scripts/robots_ign.launch">
-      <arg name="ground" value="$(arg ground)"/>
-      <arg name="air" value="$(arg air)"/>
-      <arg name="beacons1" value="$(arg beacons1)"/>
-      <arg name="beacons2" value="$(arg beacons2)"/>
-    </include>
+    <group if="$(arg simcomms)">
+      <include file="$(env HOME)/marble/scripts/robots_ign.launch">
+        <arg name="ground" value="$(arg ground)"/>
+        <arg name="air" value="$(arg air)"/>
+        <arg name="beacons1" value="$(arg beacons1)"/>
+        <arg name="beacons2" value="$(arg beacons2)"/>
+      </include>
+    </group>
   </group>
 
   <group unless="$(arg use_ign)">

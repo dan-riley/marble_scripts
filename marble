@@ -3,6 +3,8 @@
 # Setup variables to quickly switch between various modes
 # Whether to use Ignition or Gazebo
 use_ign=true
+# Use the simulated comms if true, virtual if false
+simcomms=true
 
 enable_ground=true
 enable_air=false
@@ -81,7 +83,7 @@ if [ "$1" == "start" ]; then
     fi
     # Launch Ignition
     # ign launch $ignlaunch worldName:=$scenario robotName1:=X1 robotConfig1:=marble_husky_sensor_config_1 robotName2:=X2 robotConfig2:=marble_husky_sensor_config_1 robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1 enableGroundTruth:=1 localModel:=true &
-    ign launch $ignlaunch worldName:=$scenario robotName1:=Base robotConfig1:=TEAMBASE $ground $air $beacons enableGroundTruth:=1 localModel:=true &
+    ign launch -v 3 $ignlaunch worldName:=$scenario robotName1:=Base robotConfig1:=TEAMBASE $ground $air $beacons enableGroundTruth:=1 localModel:=true &
     # ign launch $ignlaunch worldName:=$scenario robotName1:=X1 robotConfig1:=X1_SENSOR_CONFIG_4 robotName2:=X2 robotConfig2:=X1_SENSOR_CONFIG_4 robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1  enableGroundTruth:=1 $beacons localModel:=true &
     # ign launch $ignlaunch worldName:=$scenario robotName1:=X1 robotConfig1:=marble_husky_lite robotName2:=X2 robotConfig2:=SSCI_X4_SENSOR_CONFIG_1 robotName3:=Base robotConfig3:=X2_SENSOR_CONFIG_1 enableGroundTruth:=1 localModel:=true &
     sleep 10
@@ -102,7 +104,7 @@ if [ "$1" == "start" ]; then
   fi
 
   # Run our launch file
-  roslaunch ~/marble/scripts/subt.launch use_ign:=$use_ign scenario:=$scenario voxblox:=$enable_voxblox ground:=$enable_ground air:=$enable_air beacons1:=$enable_beacons1 beacons2:=$enable_beacons2 &
+  roslaunch ~/marble/scripts/subt.launch use_ign:=$use_ign simcomms:=$simcomms scenario:=$scenario voxblox:=$enable_voxblox ground:=$enable_ground air:=$enable_air beacons1:=$enable_beacons1 beacons2:=$enable_beacons2 &
   sleep 10
 
   # Run the python scripts
@@ -140,7 +142,9 @@ if [ "$1" == "start" ]; then
     beacon_comm=""
   fi
 
-  python2 ~/catkin/src/marble_multi_agent/src/comms_sim_handler.py Base $beacon_comm $ground_comm $air_comm &
+  if $simcomms; then
+    python2 ~/catkin/src/marble_multi_agent/src/comms_sim_handler.py Base $beacon_comm $ground_comm $air_comm &
+  fi
 
   sleep 5
 
@@ -148,7 +152,9 @@ if [ "$1" == "start" ]; then
   # ~/marble/scripts/marble lights
 
   # Start the comms checker
-  ~/marble/scripts/marble commscheck $enable_ground $enable_air $enable_beacons1 $enable_beacons2
+  if $simcomms; then
+    ~/marble/scripts/marble commscheck $enable_ground $enable_air $enable_beacons1 $enable_beacons2
+  fi
 
   # Start Multi-Agent nodes
   # ~/marble/scripts/marble map
@@ -225,6 +231,7 @@ elif [ "$1" == "stop" ]; then
     rosnode kill -a
     killall -9 gzserver
     killall -9 rosmaster
+    kill -9 $(pgrep -f 'marker_server')
     kill -9 $(pgrep -f 'terrain')
     kill -9 $(pgrep -f 'ros_ign')
     kill -9 $(pgrep -f 'roslaunch')
@@ -290,17 +297,27 @@ elif [ "$1" == "multiagent" ]; then
   fi
 
   echo "Starting MARBLE Multi-Agent nodes..."
-  if $enable_air; then
-    air="potentialNeighbors:=X1,X2,A01"
-    roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=A01 myBeacons:="" $air &
+  if $simcomms; then
+    launch="multi_agent_sim.launch"
+    beacons1=""
+    beacons2=""
+  else
+    launch="multi_agent_virtual.launch"
+    beacons1="B01,B02,B03,B04,B05,B06,B07,B08,B09,B10,B11,B12"
+    beacons2="B13,B14,B15,B16,B17,B18,B19,B20,B21,B22,B23,B24"
   fi
 
-  roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=Base type:=base $air &
+  if $enable_air; then
+    air="potentialNeighbors:=X1,X2,A01"
+    roslaunch marble_multi_agent $launch vehicle:=A01 myBeacons:="" stopCheck:=3600 &
+  else
+    air="potentialNeighbors:=X1,X2"
+  fi
+
+  roslaunch marble_multi_agent $launch vehicle:=Base type:=base $air &
   if $enable_ground; then
-    roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X1 myBeacons:="" $air delayDrop:=False &
-    # roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X1 myBeacons:="B01,B02,B03,B04" delayDrop:=False &
-    roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X2 myBeacons:="" $air &
-    # roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=X2 myBeacons:="B05,B06,B07,B08" &
+    roslaunch marble_multi_agent $launch vehicle:=X1 myBeacons:=$beacons1 delayDrop:=False &
+    roslaunch marble_multi_agent $launch vehicle:=X2 myBeacons:=$beacons2 &
   fi
   if $enable_beacons1; then
     roslaunch marble_multi_agent multi_agent_sim.launch vehicle:=B01 type:=beacon &

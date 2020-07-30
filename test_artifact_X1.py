@@ -29,7 +29,7 @@ from cv_bridge import CvBridge
 import numpy as np
 
 ROBOT_NAME = 'X1'
-ARTIFACT_IMG_ID = 0
+ARTIFACT_IMG_ID = 1
 ARTIFACT_IMG_PATH = 'metal.jpg'
 
 
@@ -53,6 +53,7 @@ def get_messages_filled_with_data():
         msg.position.z = 0
         msg.obj_class = ''
         msg.obj_prob = 0
+        msg.image_id = ARTIFACT_IMG_ID
         msg.has_been_reported = True
         array_msg.artifacts.append(msg)
 
@@ -77,13 +78,13 @@ def get_messages_filled_with_data():
     array_msg.artifacts[1].obj_class = 'drill'
     array_msg.artifacts[1].obj_prob = 0.454
 
-    # array_msg.artifacts[2].position.x = 60.0
-    # array_msg.artifacts[2].position.y = -2
-    # array_msg.artifacts[2].position.z = 0.2
-    # array_msg.artifacts[2].obj_class = 'person'
-    # array_msg.artifacts[2].obj_prob = 0.154
-    # array_msg.artifacts[2].has_been_reported = False
-    #
+    array_msg.artifacts[2].position.x = 60.0
+    array_msg.artifacts[2].position.y = -2
+    array_msg.artifacts[2].position.z = 0.2
+    array_msg.artifacts[2].obj_class = 'person'
+    array_msg.artifacts[2].obj_prob = 0.154
+    array_msg.artifacts[2].has_been_reported = False
+
     array_msg.artifacts[3].position.x = 40
     array_msg.artifacts[3].position.y = 20
     array_msg.artifacts[3].position.z = 0.2
