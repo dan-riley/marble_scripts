@@ -6,6 +6,8 @@
   <arg name="T02" default="false" />
   <arg name="L01" default="false" />
   <arg name="A01" default="false" />
+  <arg name="X1" default="false" />
+  <arg name="X2" default="false" />
 
   <node pkg="rviz" type="rviz" name="marble_gui" args="-d $(env HOME)/base_station/multi_agent.rviz" respawn="true" />
 
