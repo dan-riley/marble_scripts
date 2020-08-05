@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<launch>
+  <!-- Name of the robot, which also determines the tf namespace -->
+  <arg name="robot" default="H01" />
+  <!-- Name of the model to to use.  Valid options are husky, hd2 and qav500 -->
+  <arg name="model" default="husky" />
+  <!-- Frame to publish. Default is /robot_base/base_link.  Needs to match the model! -->
+  <arg name="newFrame" default="$(arg robot)_base/base_link" />
+  <!-- Use this for a regular model if you don't mind errors -->
+  <!-- <arg name="newFrame" default="$(arg robot)/base_link" /> -->
+  <!-- Odometry topic to convert into a tf -->
+  <arg name="odomTopic" default="odometry" />
+
+  <!-- Launch the robot model, which generates /robot_base/robot_description by default -->
+  <include file="$(eval find('marble_' + model + '_base') + '/launch/description.launch')">
+    <arg name="name" value="$(arg robot)" />
+  </include>
+
+  <!-- Launch odom to tf, to create a base_link tf from the odometry topic -->
+  <include file="$(find odom_to_tf)/launch/odom_to_tf.launch">
+    <arg name="vehicle" value="$(arg robot)" />
+    <arg name="newFrame" default="$(arg newFrame)" />
+    <arg name="odomTopic" default="$(arg odomTopic)" />
+  </include>
+ </launch>
