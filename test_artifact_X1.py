@@ -22,21 +22,29 @@ Both files are kept for reference in case we decide to do things in C++ or pytho
 """
 
 import rospy
-from marble_artifact_detection_msgs.msg import Artifact, ArtifactArray, ArtifactImg
+from marble_artifact_detection_msgs.msg import Artifact, ArtifactArray
 from sensor_msgs.msg import CompressedImage
 import cv2
 from cv_bridge import CvBridge
 import numpy as np
 
 ROBOT_NAME = 'X1'
-ARTIFACT_IMG_ID = 1
-ARTIFACT_IMG_PATH = 'metal.jpg'
-
 
 def get_messages_filled_with_data():
     array_msg = ArtifactArray()
-    compressed_img_msg = CompressedImage()
-    artifact_img_msg = ArtifactImg()
+    survivor_img_msg = CompressedImage()
+    extinguisher_img_msg = CompressedImage()
+    drill_img_msg = CompressedImage()
+    backpack_img_msg = CompressedImage()
+
+    cv_img = cv2.imread('survivor.jpg', cv2.IMREAD_COLOR)
+    survivor_img_msg = CvBridge().cv2_to_compressed_imgmsg(cv_img)
+    cv_img = cv2.imread('extinguisher.jpg', cv2.IMREAD_COLOR)
+    extinguisher_img_msg = CvBridge().cv2_to_compressed_imgmsg(cv_img)
+    cv_img = cv2.imread('drill.jpg', cv2.IMREAD_COLOR)
+    drill_img_msg = CvBridge().cv2_to_compressed_imgmsg(cv_img)
+    cv_img = cv2.imread('backpack.jpg', cv2.IMREAD_COLOR)
+    backpack_img_msg = CvBridge().cv2_to_compressed_imgmsg(cv_img)
 
     array_msg.header.seq = 1
     array_msg.header.stamp = rospy.Time.now()
@@ -48,75 +56,66 @@ def get_messages_filled_with_data():
         msg.header.seq = i
         msg.header.stamp = rospy.Time.now()
         msg.header.frame_id = ''
+        msg.artifact_id = i
         msg.position.x = 0
         msg.position.y = 0
         msg.position.z = 0
         msg.obj_class = ''
         msg.obj_prob = 0
-        msg.image_id = ARTIFACT_IMG_ID
-        msg.has_been_reported = True
         array_msg.artifacts.append(msg)
 
     array_msg.artifacts[0].position.x = 70
     array_msg.artifacts[0].position.y = -60
     array_msg.artifacts[0].position.z = 0.2
     array_msg.artifacts[0].obj_class = 'backpack'
+    array_msg.artifacts[0].image_data = backpack_img_msg
     array_msg.artifacts[0].obj_prob = 0.785
-    array_msg.artifacts[0].has_been_reported = False
-
-    cv_img = cv2.imread(ARTIFACT_IMG_PATH, cv2.IMREAD_COLOR)
-    compressed_img_msg = CvBridge().cv2_to_compressed_imgmsg(cv_img)
-
-    artifact_img_msg.header.stamp = rospy.Time.now()
-    artifact_img_msg.artifact_img = compressed_img_msg
-    artifact_img_msg.image_id = ARTIFACT_IMG_ID
-    artifact_img_msg.vehicle_reporter = ROBOT_NAME
 
     array_msg.artifacts[1].position.x = 25
     array_msg.artifacts[1].position.y = 2.0
     array_msg.artifacts[1].position.z = 0.2
     array_msg.artifacts[1].obj_class = 'drill'
+    array_msg.artifacts[1].image_data = drill_img_msg
     array_msg.artifacts[1].obj_prob = 0.454
 
     array_msg.artifacts[2].position.x = 60.0
     array_msg.artifacts[2].position.y = -2
     array_msg.artifacts[2].position.z = 0.2
     array_msg.artifacts[2].obj_class = 'person'
+    array_msg.artifacts[2].image_data = survivor_img_msg
     array_msg.artifacts[2].obj_prob = 0.154
-    array_msg.artifacts[2].has_been_reported = False
 
     array_msg.artifacts[3].position.x = 40
     array_msg.artifacts[3].position.y = 20
     array_msg.artifacts[3].position.z = 0.2
     array_msg.artifacts[3].obj_class = 'extinguisher'
+    array_msg.artifacts[3].image_data = extinguisher_img_msg
     array_msg.artifacts[3].obj_prob = 0.972
 
     # array_msg.artifacts[4].position.x = 65
     # array_msg.artifacts[4].position.y = -40
     # array_msg.artifacts[4].position.z = 0.2
     # array_msg.artifacts[4].obj_class = 'extinguisher'
+    # array_msg.artifacts[4].image_data = extinguisher_img_msg
     # array_msg.artifacts[4].obj_prob = 0.972
     #
     # array_msg.artifacts[5].position.x = 15
     # array_msg.artifacts[5].position.y = -60
     # array_msg.artifacts[5].position.z = 0.2
     # array_msg.artifacts[5].obj_class = 'extinguisher'
+    # array_msg.artifacts[5].image_data = extinguisher_img_msg
     # array_msg.artifacts[5].obj_prob = 0.972
 
-    return array_msg, compressed_img_msg, artifact_img_msg
+    return array_msg
 
 
 rospy.init_node('fake_artifact_array_pub', anonymous=True)
 
 array_pub = rospy.Publisher('/' + ROBOT_NAME + '/artifact_array', ArtifactArray, queue_size=10)
-img_pub = rospy.Publisher('/' + ROBOT_NAME + '/artifact_image_to_base', ArtifactImg, queue_size=10)
-rqt_img_pub = rospy.Publisher('/' + ROBOT_NAME + '/' + str(ARTIFACT_IMG_ID) + '/artifact_img/compressed', CompressedImage, queue_size=10)
 
-array_msg, compressed_img_msg, artifact_img_msg = get_messages_filled_with_data()
+array_msg = get_messages_filled_with_data()
 
 rate = rospy.Rate(1)
 while not rospy.is_shutdown():
     array_pub.publish(array_msg)
-    img_pub.publish(artifact_img_msg)
-    rqt_img_pub.publish(compressed_img_msg)
     rate.sleep()
