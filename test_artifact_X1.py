@@ -56,7 +56,7 @@ def get_messages_filled_with_data():
         msg.header.seq = i
         msg.header.stamp = rospy.Time.now()
         msg.header.frame_id = ''
-        msg.artifact_id = i
+        msg.artifact_id = ROBOT_NAME + '_' + str(i)
         msg.position.x = 0
         msg.position.y = 0
         msg.position.z = 0
@@ -65,7 +65,7 @@ def get_messages_filled_with_data():
         array_msg.artifacts.append(msg)
 
     array_msg.artifacts[0].position.x = 70
-    array_msg.artifacts[0].position.y = -60
+    array_msg.artifacts[0].position.y = -3.9
     array_msg.artifacts[0].position.z = 0.2
     array_msg.artifacts[0].obj_class = 'backpack'
     array_msg.artifacts[0].image_data = backpack_img_msg

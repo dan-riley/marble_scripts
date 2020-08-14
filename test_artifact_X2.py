@@ -56,7 +56,7 @@ def get_messages_filled_with_data():
         msg.header.seq = i
         msg.header.stamp = rospy.Time.now()
         msg.header.frame_id = ''
-        msg.artifact_id = i
+        msg.artifact_id = ROBOT_NAME + '_' + str(i)
         msg.position.x = 0
         msg.position.y = 0
         msg.position.z = 0
@@ -65,7 +65,7 @@ def get_messages_filled_with_data():
         array_msg.artifacts.append(msg)
 
     array_msg.artifacts[3].position.x = 71
-    array_msg.artifacts[3].position.y = -61
+    array_msg.artifacts[3].position.y = -4.6
     array_msg.artifacts[3].position.z = 0.3
     array_msg.artifacts[3].obj_class = 'backpack'
     array_msg.artifacts[3].image_data = backpack_img_msg
@@ -88,8 +88,8 @@ def get_messages_filled_with_data():
     array_msg.artifacts[6].position.x = 41
     array_msg.artifacts[6].position.y = 21
     array_msg.artifacts[6].position.z = 0.1
-    array_msg.artifacts[6].obj_class = 'extinguisher'
-    array_msg.artifacts[6].image_data = extinguisher_img_msg
+    array_msg.artifacts[6].obj_class = 'person'
+    array_msg.artifacts[6].image_data = survivor_img_msg
     array_msg.artifacts[6].obj_prob = 0.972
 
     array_msg.artifacts[7].position.x = 64
@@ -105,7 +105,7 @@ def get_messages_filled_with_data():
     # array_msg.artifacts[8].obj_class = 'extinguisher'
     # array_msg.artifacts[8].image_data = extinguisher_img_msg
     # array_msg.artifacts[8].obj_prob = 0.972
-    #
+
     return array_msg
 
 
