@@ -10,11 +10,11 @@
     </include>
   <include file="$(find merge_poses_pkg)/launch/merge_poses_ma.launch" />
 
-  <include file="$(find mapping_relay)/launch/test_mapping_relay.launch" if="$(arg testRelay)">
-    <arg name="mapping_server_ip" value="$(arg ipAddress)" />
-  </include>
-  <include file="$(find mapping_relay)/launch/mapping_relay.launch" if="(arg mappingRelay)">
-    <arg name="mapping_server_ip" value="$(arg ipAddress)" />
-  </include>
+  <!-- <include file="$(find mapping_relay)/launch/test_mapping_relay.launch" if="$(arg testRelay)"> -->
+  <!--   <arg name="mapping_server_ip" value="$(arg ipAddress)" /> -->
+  <!-- </include> -->
+  <!-- <include file="$(find mapping_relay)/launch/mapping_relay.launch" if="(arg mappingRelay)"> -->
+  <!--   <arg name="mapping_server_ip" value="$(arg ipAddress)" /> -->
+  <!-- </include> -->
 
  </launch>
