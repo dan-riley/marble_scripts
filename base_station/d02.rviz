@@ -6,8 +6,8 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /L01 Path1/Shape1
-        - /L01 Odom1/Shape1
+        - /D02 Path1/Shape1
+        - /D02 Odom1/Shape1
       Splitter Ratio: 0.5
     Tree Height: 363
   - Class: rviz/Selection
@@ -64,13 +64,13 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        L01_base/base_link:
+        D02_base/base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
       Name: RobotModel
-      Robot Description: L01_base/robot_description
+      Robot Description: D02_base/robot_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -110,7 +110,7 @@ Visualization Manager:
         Value: true
       Enabled: true
       Keep: 0
-      Name: L01 Path
+      Name: D02 Path
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
@@ -122,7 +122,7 @@ Visualization Manager:
         Shaft Length: 0.30000001192092896
         Shaft Radius: 0.30000001192092896
         Value: Arrow
-      Topic: /Base/neighbors/L01/odometry
+      Topic: /Base/neighbors/D02/odometry
       Unreliable: false
       Value: true
     - Class: octomap_rviz_plugin/OccupancyGrid
@@ -130,8 +130,8 @@ Visualization Manager:
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
       Min. Height Display: -3.4028234663852886e+38
-      Name: L01 Octomap
-      Octomap Topic: /Base/neighbors/L01/map
+      Name: D02 Octomap
+      Octomap Topic: /Base/neighbors/D02/map
       Queue Size: 5
       Value: true
       Voxel Alpha: 1
@@ -156,7 +156,7 @@ Visualization Manager:
         Value: true
       Enabled: false
       Keep: 1
-      Name: L01 Odom
+      Name: D02 Odom
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
@@ -168,7 +168,7 @@ Visualization Manager:
         Shaft Length: 1
         Shaft Radius: 0.5
         Value: Arrow
-      Topic: /Base/neighbors/L01/odometry
+      Topic: /Base/neighbors/D02/odometry
       Unreliable: false
       Value: false
     - Alpha: 1
@@ -179,11 +179,11 @@ Visualization Manager:
       Enabled: true
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
-      Name: L01 Goal
+      Name: D02 Goal
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /Base/neighbors/L01/goal
+      Topic: /Base/neighbors/D02/goal
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -196,7 +196,7 @@ Visualization Manager:
       Length: 0.30000001192092896
       Line Style: Billboards
       Line Width: 0.10000000149011612
-      Name: L01 Goal Path
+      Name: D02 Goal Path
       Offset:
         X: 0
         Y: 0
@@ -206,7 +206,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /Base/neighbors/L01/path
+      Topic: /Base/neighbors/D02/path
       Unreliable: false
       Value: true
   Enabled: true
@@ -253,7 +253,7 @@ Visualization Manager:
       Name: Current View
       Near Clip Distance: 0.009999999776482582
       Pitch: 1.0753979682922363
-      Target Frame: L01_base/base_link
+      Target Frame: D02_base/base_link
       Value: ThirdPersonFollower (rviz)
       Yaw: 3.245403528213501
     Saved: ~

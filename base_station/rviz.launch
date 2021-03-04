@@ -5,6 +5,8 @@
   <arg name="T01" default="false" />
   <arg name="T02" default="false" />
   <arg name="L01" default="false" />
+  <arg name="D01" default="false" />
+  <arg name="D02" default="false" />
   <arg name="A01" default="false" />
   <arg name="X1" default="false" />
   <arg name="X2" default="false" />
@@ -70,6 +72,26 @@
       <arg name="vehicle" value="L01" />
     </include>
     <node pkg="rviz" type="rviz" name="marble_l01" args="-d $(env HOME)/base_station/l01.rviz" respawn="true" />
+  </group>
+
+  <group if="$(arg D01)">
+    <include file="$(find marble_spot_base)/launch/description.launch">
+      <arg name="name" value="D01" />
+    </include>
+    <include file="$(find odom_to_tf)/launch/odom_to_tf.launch">
+      <arg name="vehicle" value="D01" />
+    </include>
+    <node pkg="rviz" type="rviz" name="marble_d01" args="-d $(env HOME)/base_station/d01.rviz" respawn="true" />
+  </group>
+
+  <group if="$(arg D02)">
+    <include file="$(find marble_spot_base)/launch/description.launch">
+      <arg name="name" value="D02" />
+    </include>
+    <include file="$(find odom_to_tf)/launch/odom_to_tf.launch">
+      <arg name="vehicle" value="D02" />
+    </include>
+    <node pkg="rviz" type="rviz" name="marble_d02" args="-d $(env HOME)/base_station/d02.rviz" respawn="true" />
   </group>
 
   <group if="$(arg X1)">

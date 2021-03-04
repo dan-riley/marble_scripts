@@ -9,7 +9,7 @@ Panels:
         - /H01 Path1/Shape1
         - /H02 Path1/Shape1
         - /H03 Path1/Shape1
-        - /D01 Path1/Shape1
+        - /T01 Path1/Shape1
         - /H01 Odom1/Shape1
         - /H02 Odom1/Shape1
         - /H03 Odom1/Shape1
@@ -106,7 +106,7 @@ Visualization Manager:
         Shaft Length: 0.30000001192092896
         Shaft Radius: 0.30000001192092896
         Value: Arrow
-      Topic: /Base/neighbors/H01/odometry
+      Topic: /Base/neighbors/X1/odometry
       Unreliable: false
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -196,7 +196,7 @@ Visualization Manager:
         Value: true
       Enabled: true
       Keep: 0
-      Name: D01 Path
+      Name: T01 Path
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
@@ -208,7 +208,7 @@ Visualization Manager:
         Shaft Length: 0.30000001192092896
         Shaft Radius: 0.30000001192092896
         Value: Arrow
-      Topic: /Base/neighbors/D01/odometry
+      Topic: /Base/neighbors/X2/odometry
       Unreliable: false
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -230,7 +230,7 @@ Visualization Manager:
         Value: true
       Enabled: true
       Keep: 0
-      Name: D02 Path
+      Name: T02 Path
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
@@ -242,7 +242,7 @@ Visualization Manager:
         Shaft Length: 0.30000001192092896
         Shaft Radius: 0.30000001192092896
         Value: Arrow
-      Topic: /Base/neighbors/D02/odometry
+      Topic: /Base/neighbors/T02/odometry
       Unreliable: false
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -354,8 +354,8 @@ Visualization Manager:
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
       Min. Height Display: -3.4028234663852886e+38
-      Name: D01 Octomap
-      Octomap Topic: /Base/neighbors/D01/map
+      Name: T01 Octomap
+      Octomap Topic: /Base/neighbors/T01/map
       Queue Size: 5
       Value: false
       Voxel Alpha: 0.20000000298023224
@@ -366,8 +366,8 @@ Visualization Manager:
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
       Min. Height Display: -3.4028234663852886e+38
-      Name: D02 Octomap
-      Octomap Topic: /Base/neighbors/D02/map
+      Name: T02 Octomap
+      Octomap Topic: /Base/neighbors/T02/map
       Queue Size: 5
       Value: false
       Voxel Alpha: 0.20000000298023224
@@ -408,92 +408,7 @@ Visualization Manager:
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
       Name: H01 Robot
-      Robot Description: /H01_base/robot_description
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
-    - Alpha: 1
-      Class: rviz/RobotModel
-      Collision Enabled: false
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-      Name: H02 Robot
-      Robot Description: /H02_base/robot_description
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
-    - Alpha: 1
-      Class: rviz/RobotModel
-      Collision Enabled: false
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-      Name: H03 Robot
-      Robot Description: /H03_base/robot_description
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
-    - Alpha: 1
-      Class: rviz/RobotModel
-      Collision Enabled: false
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-      Name: A01 Robot
-      Robot Description: /A01_base/robot_description
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
-    - Alpha: 1
-      Class: rviz/RobotModel
-      Collision Enabled: false
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        D01_base/base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-      Name: D01 Robot
-      Robot Description: /D01_base/robot_description
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
-    - Alpha: 1
-      Class: rviz/RobotModel
-      Collision Enabled: false
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-      Name: D02 Robot
-      Robot Description: /D02_base/robot_description
+      Robot Description: /X1_base/robot_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -619,7 +534,7 @@ Visualization Manager:
         Value: true
       Enabled: true
       Keep: 1
-      Name: D01 Odom
+      Name: T01 Odom
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
@@ -631,9 +546,25 @@ Visualization Manager:
         Shaft Length: 1
         Shaft Radius: 0.5
         Value: Arrow
-      Topic: /Base/neighbors/D01/odometry
+      Topic: /Base/neighbors/X2/odometry
       Unreliable: false
       Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+      Name: T02 Robot
+      Robot Description: /X2_base/robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
     - Angle Tolerance: 0.10000000149011612
       Class: rviz/Odometry
       Covariance:
@@ -653,7 +584,7 @@ Visualization Manager:
         Value: true
       Enabled: false
       Keep: 1
-      Name: D02 Odom
+      Name: T02 Odom
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
@@ -665,7 +596,7 @@ Visualization Manager:
         Shaft Length: 1
         Shaft Radius: 0.5
         Value: Arrow
-      Topic: /Base/neighbors/D02/odometry
+      Topic: /Base/neighbors/T02/odometry
       Unreliable: false
       Value: false
     - Angle Tolerance: 0.10000000149011612
@@ -699,7 +630,7 @@ Visualization Manager:
         Shaft Length: 1
         Shaft Radius: 0.5
         Value: Arrow
-      Topic: /Base/neighbors/L01/odometry
+      Topic: /Base/neighbors/T01/odometry
       Unreliable: false
       Value: false
     - Angle Tolerance: 0.10000000149011612
@@ -748,7 +679,7 @@ Visualization Manager:
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /Base/neighbors/H01/goal
+      Topic: /Base/neighbors/X1/goal
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -789,11 +720,11 @@ Visualization Manager:
       Enabled: true
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
-      Name: D01 Goal
+      Name: T01 Goal
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /Base/neighbors/D01/goal
+      Topic: /Base/neighbors/X2/goal
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -804,11 +735,11 @@ Visualization Manager:
       Enabled: true
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
-      Name: D02 Goal
+      Name: T02 Goal
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /Base/neighbors/D02/goal
+      Topic: /Base/neighbors/T01/goal
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -823,7 +754,7 @@ Visualization Manager:
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /Base/neighbors/L01/goal
+      Topic: /Base/neighbors/T01/goal
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -861,7 +792,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /Base/neighbors/H01/path
+      Topic: /Base/neighbors/X1/path
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -920,7 +851,7 @@ Visualization Manager:
       Length: 0.30000001192092896
       Line Style: Billboards
       Line Width: 0.10000000149011612
-      Name: D01 Goal Path
+      Name: T01 Goal Path
       Offset:
         X: 0
         Y: 0
@@ -930,7 +861,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /Base/neighbors/D01/path
+      Topic: /Base/neighbors/X2/path
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -943,7 +874,7 @@ Visualization Manager:
       Length: 0.30000001192092896
       Line Style: Billboards
       Line Width: 0.10000000149011612
-      Name: D02 Goal Path
+      Name: T02 Goal Path
       Offset:
         X: 0
         Y: 0
@@ -953,7 +884,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /Base/neighbors/D02/path
+      Topic: /Base/neighbors/T02/path
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -1080,8 +1011,8 @@ Visualization Manager:
       Color Scheme: map
       Draw Behind: false
       Enabled: false
-      Name: D01 Map
-      Topic: /D01/map
+      Name: T01 Map
+      Topic: /T01/map
       Unreliable: false
       Use Timestamp: false
       Value: false
@@ -1090,8 +1021,8 @@ Visualization Manager:
       Color Scheme: map
       Draw Behind: false
       Enabled: false
-      Name: D02 Map
-      Topic: /D02/map
+      Name: T02 Map
+      Topic: /T02/map
       Unreliable: false
       Use Timestamp: false
       Value: false
@@ -1100,7 +1031,7 @@ Visualization Manager:
       Marker Topic: /Base/merged_map_markers
       Name: Merged Map
       Namespaces:
-        {}
+        map: true
       Queue Size: 100
       Value: true
   Enabled: true
@@ -1131,7 +1062,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 20.438257217407227
+      Distance: 49.15746307373047
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -1167,5 +1098,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1479
-  X: 3134
-  Y: 0
+  X: 1434
+  Y: 438
