@@ -8,9 +8,9 @@
                                    1|std_msgs/Bool|radio_reset_cmd,
                                    1|sensor_msgs/Joy|joy_base,
                                    2|geometry_msgs/TransformStamped|origin_from_base,
-                                   2|marble_multi_agent/AgentMsg|ma_data,
-                                   3|marble_multi_agent/DMReqArray|dm_request,
-                                   4|marble_multi_agent/DMRespArray|dm_response]" />
+                                   2|bobcat/AgentMsg|ma_data,
+                                   3|bobcat/DMReqArray|dm_request,
+                                   4|bobcat/DMRespArray|dm_response]" />
     <arg name="host_list" value="[]" />
 
   </include>

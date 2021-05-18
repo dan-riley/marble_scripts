@@ -3,7 +3,7 @@
 filename="$HOME/base_station/base_config"
 
 # Set via command-line
-MA_NEIGHBORS="H01,T02"
+MA_NEIGHBORS="H01,D01"
 MA_USEMESH=true
 MA_INTERFACE="enp60s0"
 

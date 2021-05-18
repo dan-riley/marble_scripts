@@ -1,4 +1,4 @@
 #!/bin/bash
 source "$HOME/base_station/base_config"
 
-roslaunch marble_multi_agent multi_agent_base.launch potentialNeighbors:=$MA_NEIGHBORS useMesh:=$MA_USEMESH
+roslaunch bobcat bobcat_base.launch potentialNeighbors:=$MA_NEIGHBORS useMesh:=$MA_USEMESH
