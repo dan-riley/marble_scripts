@@ -125,7 +125,7 @@ Visualization Manager:
       Topic: /Base/neighbors/T02/odometry
       Unreliable: false
       Value: true
-    - Class: octomap_rviz_plugin/OccupancyGrid
+    - Class: rough_octomap/RoughOccupancyGrid
       Enabled: true
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16

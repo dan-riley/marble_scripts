@@ -60,15 +60,15 @@ Visualization Manager:
       Enabled: true
       Links:
         All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
         D01_base/base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
       Name: RobotModel
       Robot Description: D01_base/robot_description
       TF Prefix: ""
@@ -80,7 +80,7 @@ Visualization Manager:
       Marker Topic: /Base/martifacts
       Name: Artifacts
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -125,7 +125,7 @@ Visualization Manager:
       Topic: /Base/neighbors/D01/odometry
       Unreliable: false
       Value: true
-    - Class: octomap_rviz_plugin/OccupancyGrid
+    - Class: rough_octomap/RoughOccupancyGrid
       Enabled: true
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
@@ -273,5 +273,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 747
-  X: 3134
-  Y: 960
+  X: 4613
+  Y: 950

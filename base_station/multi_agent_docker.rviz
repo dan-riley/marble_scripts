@@ -313,7 +313,7 @@ Visualization Manager:
       Topic: /Base/neighbors/A01/odometry
       Unreliable: false
       Value: true
-    - Class: octomap_rviz_plugin/OccupancyGrid
+    - Class: rough_octomap/RoughOccupancyGrid
       Enabled: false
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
@@ -325,7 +325,7 @@ Visualization Manager:
       Voxel Alpha: 0.20000000298023224
       Voxel Coloring: Z-Axis
       Voxel Rendering: Occupied Voxels
-    - Class: octomap_rviz_plugin/OccupancyGrid
+    - Class: rough_octomap/RoughOccupancyGrid
       Enabled: false
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
@@ -337,7 +337,7 @@ Visualization Manager:
       Voxel Alpha: 0.20000000298023224
       Voxel Coloring: Z-Axis
       Voxel Rendering: Occupied Voxels
-    - Class: octomap_rviz_plugin/OccupancyGrid
+    - Class: rough_octomap/RoughOccupancyGrid
       Enabled: false
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
@@ -349,7 +349,7 @@ Visualization Manager:
       Voxel Alpha: 0.20000000298023224
       Voxel Coloring: Z-Axis
       Voxel Rendering: Occupied Voxels
-    - Class: octomap_rviz_plugin/OccupancyGrid
+    - Class: rough_octomap/RoughOccupancyGrid
       Enabled: false
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
@@ -361,7 +361,7 @@ Visualization Manager:
       Voxel Alpha: 0.20000000298023224
       Voxel Coloring: Z-Axis
       Voxel Rendering: Occupied Voxels
-    - Class: octomap_rviz_plugin/OccupancyGrid
+    - Class: rough_octomap/RoughOccupancyGrid
       Enabled: false
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
@@ -373,7 +373,7 @@ Visualization Manager:
       Voxel Alpha: 0.20000000298023224
       Voxel Coloring: Z-Axis
       Voxel Rendering: Occupied Voxels
-    - Class: octomap_rviz_plugin/OccupancyGrid
+    - Class: rough_octomap/RoughOccupancyGrid
       Enabled: false
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
@@ -385,7 +385,7 @@ Visualization Manager:
       Voxel Alpha: 0.20000000298023224
       Voxel Coloring: Z-Axis
       Voxel Rendering: Occupied Voxels
-    - Class: octomap_rviz_plugin/OccupancyGrid
+    - Class: rough_octomap/RoughOccupancyGrid
       Enabled: false
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
