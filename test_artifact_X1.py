@@ -85,9 +85,9 @@ def get_messages_filled_with_data():
     array_msg.artifacts[2].image_data = survivor_img_msg
     array_msg.artifacts[2].obj_prob = 0.154
 
-    array_msg.artifacts[3].position.x = 40
-    array_msg.artifacts[3].position.y = 20
-    array_msg.artifacts[3].position.z = 0.2
+    array_msg.artifacts[3].position.x = 83
+    array_msg.artifacts[3].position.y = -80
+    array_msg.artifacts[3].position.z = 0.8
     array_msg.artifacts[3].obj_class = 'extinguisher'
     array_msg.artifacts[3].image_data = extinguisher_img_msg
     array_msg.artifacts[3].obj_prob = 0.972
@@ -111,7 +111,7 @@ def get_messages_filled_with_data():
 
 rospy.init_node('fake_artifact_array_pub', anonymous=True)
 
-array_pub = rospy.Publisher('/' + ROBOT_NAME + '/artifact_array', ArtifactArray, queue_size=10)
+array_pub = rospy.Publisher('/' + ROBOT_NAME + '/artifact_array/relay', ArtifactArray, queue_size=10)
 
 array_msg = get_messages_filled_with_data()
 

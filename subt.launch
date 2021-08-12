@@ -21,6 +21,10 @@
         <arg name="beacons2" value="$(arg beacons2)"/>
       </include>
     </group>
+    <!-- Launch virtual comms.  Probably need a different way in case we have an air vehicle-->
+    <group unless="$(arg simcomms)">
+      <include file="$(find marble_virtual_comms)/launch/virtual_team.launch" />
+    </group>
   </group>
 
   <group unless="$(arg use_ign)">

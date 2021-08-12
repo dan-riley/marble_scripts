@@ -28,7 +28,7 @@ import cv2
 from cv_bridge import CvBridge
 import numpy as np
 
-ROBOT_NAME = 'X2'
+ROBOT_NAME = 'X1'
 
 def get_messages_filled_with_data():
     array_msg = ArtifactArray()
@@ -71,33 +71,33 @@ def get_messages_filled_with_data():
     array_msg.artifacts[3].image_data = backpack_img_msg
     array_msg.artifacts[3].obj_prob = 0.785
 
-    array_msg.artifacts[4].position.x = 24
-    array_msg.artifacts[4].position.y = 2.6
-    array_msg.artifacts[4].position.z = 0.1
-    array_msg.artifacts[4].obj_class = 'drill'
-    array_msg.artifacts[4].image_data = drill_img_msg
-    array_msg.artifacts[4].obj_prob = 0.454
-
-    array_msg.artifacts[5].position.x = 61.0
-    array_msg.artifacts[5].position.y = -1
-    array_msg.artifacts[5].position.z = 0.3
-    array_msg.artifacts[5].obj_class = 'person'
-    array_msg.artifacts[5].image_data = survivor_img_msg
-    array_msg.artifacts[5].obj_prob = 0.154
-
-    array_msg.artifacts[6].position.x = 41
-    array_msg.artifacts[6].position.y = 21
-    array_msg.artifacts[6].position.z = 0.1
-    array_msg.artifacts[6].obj_class = 'person'
-    array_msg.artifacts[6].image_data = survivor_img_msg
-    array_msg.artifacts[6].obj_prob = 0.972
-
-    array_msg.artifacts[7].position.x = 64
-    array_msg.artifacts[7].position.y = -41
-    array_msg.artifacts[7].position.z = 0.3
-    array_msg.artifacts[7].obj_class = 'extinguisher'
-    array_msg.artifacts[7].image_data = extinguisher_img_msg
-    array_msg.artifacts[7].obj_prob = 0.972
+    # array_msg.artifacts[4].position.x = 24
+    # array_msg.artifacts[4].position.y = 2.6
+    # array_msg.artifacts[4].position.z = 0.1
+    # array_msg.artifacts[4].obj_class = 'drill'
+    # array_msg.artifacts[4].image_data = drill_img_msg
+    # array_msg.artifacts[4].obj_prob = 0.454
+    #
+    # array_msg.artifacts[5].position.x = 61.0
+    # array_msg.artifacts[5].position.y = -1
+    # array_msg.artifacts[5].position.z = 0.3
+    # array_msg.artifacts[5].obj_class = 'person'
+    # array_msg.artifacts[5].image_data = survivor_img_msg
+    # array_msg.artifacts[5].obj_prob = 0.154
+    #
+    # array_msg.artifacts[6].position.x = 41
+    # array_msg.artifacts[6].position.y = 21
+    # array_msg.artifacts[6].position.z = 0.1
+    # array_msg.artifacts[6].obj_class = 'person'
+    # array_msg.artifacts[6].image_data = survivor_img_msg
+    # array_msg.artifacts[6].obj_prob = 0.972
+    #
+    # array_msg.artifacts[7].position.x = 64
+    # array_msg.artifacts[7].position.y = -41
+    # array_msg.artifacts[7].position.z = 0.3
+    # array_msg.artifacts[7].obj_class = 'extinguisher'
+    # array_msg.artifacts[7].image_data = extinguisher_img_msg
+    # array_msg.artifacts[7].obj_prob = 0.972
 
     # array_msg.artifacts[8].position.x = 14
     # array_msg.artifacts[8].position.y = -61
@@ -111,7 +111,7 @@ def get_messages_filled_with_data():
 
 rospy.init_node('fake_artifact_array_pub', anonymous=True)
 
-array_pub = rospy.Publisher('/' + ROBOT_NAME + '/artifact_array', ArtifactArray, queue_size=10)
+array_pub = rospy.Publisher('/' + ROBOT_NAME + '/artifact_array/relay', ArtifactArray, queue_size=10)
 
 array_msg = get_messages_filled_with_data()
 

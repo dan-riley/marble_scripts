@@ -61,6 +61,11 @@ if __name__ == '__main__':
     with rosbag.Bag(outputfile, 'w') as outbag:
         for topic, msg, t in rosbag.Bag(inputfile).read_messages():
             outbag.write(topic, msg, t)
+            if 'blacklist' in topic:
+                tid = topic.split('/')[2]
+                blTopic = '/' + tid + '/blacklist'
+                outbag.write(blTopic, msg, t)
+
             if 'ma_data' in topic:
                 odomTopic = '/' + msg.id + '/odometry'
                 odomMsg = msg.odometry

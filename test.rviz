@@ -6,6 +6,9 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /Merged Diff Markers1
+        - /Path1
+        - /Path2
       Splitter Ratio: 0.5
     Tree Height: 1079
   - Class: rviz/Selection
@@ -108,14 +111,14 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rough_octomap/RoughOccupancyGrid
-      Enabled: true
+      Enabled: false
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
       Min. Height Display: -3.4028234663852886e+38
       Name: X1 Merged Map
       Octomap Topic: /X1/merged_map
       Queue Size: 5
-      Value: true
+      Value: false
       Voxel Alpha: 1
       Voxel Coloring: Z-Axis
       Voxel Rendering: Occupied Voxels
@@ -335,14 +338,14 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rough_octomap/RoughOccupancyGrid
-      Enabled: true
+      Enabled: false
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
       Min. Height Display: -3.4028234663852886e+38
       Name: X2 Merged Map
       Octomap Topic: /X2/merged_map
       Queue Size: 5
-      Value: true
+      Value: false
       Voxel Alpha: 1
       Voxel Coloring: Z-Axis
       Voxel Rendering: Occupied Voxels
@@ -517,7 +520,7 @@ Visualization Manager:
       Marker Topic: /X2/blacklist
       Name: X2 Blacklist
       Namespaces:
-        {}
+        "": true
       Queue Size: 100
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -1171,7 +1174,7 @@ Visualization Manager:
       Marker Topic: /Base/mbeacons
       Name: Beacons
       Namespaces:
-        {}
+        "": true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -1193,11 +1196,57 @@ Visualization Manager:
       Value: true
     - Class: rviz/MarkerArray
       Enabled: true
-      Marker Topic: /merged_map_markers
+      Marker Topic: /Base/merged_map_markers
       Name: Merged Diff Markers
       Namespaces:
-        {}
+        map: true
       Queue Size: 100
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 239; 41; 41
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /X1/path_world
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 245; 121; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /X2/path_world
+      Unreliable: false
       Value: true
   Enabled: true
   Global Options:
@@ -1227,25 +1276,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 33.50861740112305
+      Distance: 121.8624267578125
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -4.756155014038086
-        Y: 0.9206869602203369
-        Z: -1.7004431356326677e-5
+        X: 14.326595306396484
+        Y: 11.43667221069336
+        Z: -1.745642293826677e-6
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.4652019739151
+      Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: XYOrbit (rviz)
-      Yaw: 3.1485753059387207
+      Yaw: 2.8985745906829834
     Saved: ~
 Window Geometry:
   Displays:
@@ -1264,4 +1313,4 @@ Window Geometry:
     collapsed: true
   Width: 1582
   X: 1238
-  Y: 215
+  Y: 185

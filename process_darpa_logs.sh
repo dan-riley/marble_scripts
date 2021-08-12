@@ -4,11 +4,18 @@
 
 IFS='-'
 idx=1
-for file in *.tar ; do
+for file in *.tar.gz ; do
   echo "processing $file"
   read -a agents <<< "${file%.*}"
   if [ ${#agents[@]} == 7 ]; then
-    dir="${agents[6]}"
+    dir="${agents[6]::-4}"
+    if [ ${#dir} == 1 ]; then
+      dir="master"
+    fi
+  elif [ ${#agents[@]} == 9 ]; then
+    dir="${agents[8]::-4}"
+  elif [ ${#agents[@]} == 10 ]; then
+    dir="${agents[8]}"
   else
     dir="master"
   fi
@@ -18,24 +25,32 @@ for file in *.tar ; do
 
   cd $dir
   echo "extracting $dir"
-  tar xf *.tar
-  rm *.tar
+  tar xzf *.tar.gz
+  rm *.tar.gz
   if [ "$dir" != "master" ]; then
     echo "processing bag data for $dir"
-    mv robot_data_0.bag.active robot_data_0.bag
-    rosbag reindex robot_data_0.bag
-    rm robot_data_0.orig.bag
-
-    if [ $idx == 1 ]; then
-      cp robot_data_0.bag ../temp_$idx.bag
-      temp=3
-    else
-      let "pidx=$idx-1"
-      python ~/marble/scripts/bag_utils/bagmerge.py -o ../temp_$idx.bag ../temp_$pidx.bag robot_data_0.bag
-      rm ../temp_$pidx.bag
+    # Reindex any active bags
+    if find . -name 'robot_data_*.bag.active' -printf 1 -quit | grep -q 1; then
+      for robot_active in robot_data_*.bag.active ; do
+        newfile=${robot_active:0:${#robot_active}-11}
+        mv "$robot_active" "$newfile.bag"
+        rosbag reindex "$newfile.bag"
+        rm "$newfile.orig.bag"
+      done
     fi
-    let "idx=$idx+1"
+
+    for robot_data in robot_data_*.bag ; do
+      if [ $idx == 1 ]; then
+        cp "$robot_data" ../temp_$idx.bag
+      else
+        let "pidx=$idx-1"
+        python ~/marble/scripts/bag_utils/bagmerge.py -o ../temp_$idx.bag ../temp_$pidx.bag "$robot_data"
+        rm ../temp_$pidx.bag
+      fi
+      let "idx=$idx+1"
+    done
   fi
+  find . -name '*log*' | xargs gzip
   cd ..
 done
 
