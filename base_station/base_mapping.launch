@@ -13,7 +13,7 @@
   <include file="$(find mapping_relay)/launch/test_mapping_relay.launch" if="$(arg testRelay)">
     <arg name="mapping_server_ip" value="$(arg ipAddress)" />
   </include>
-  <include file="$(find mapping_relay)/launch/mapping_relay.launch" if="(arg mappingRelay)">
+  <include file="$(find mapping_relay)/launch/mapping_relay.launch" if="$(arg mappingRelay)">
     <arg name="mapping_server_ip" value="$(arg ipAddress)" />
   </include>
 
