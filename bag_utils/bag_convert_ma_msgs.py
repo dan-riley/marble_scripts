@@ -1,6 +1,8 @@
 import sys
 import rospy
 import rosbag
+from nav_msgs.msg import Path
+from geometry_msgs.msg import PoseStamped
 from visualization_msgs.msg import Marker
 from visualization_msgs.msg import MarkerArray
 from marble_multi_agent.msg import AgentMsg
@@ -36,6 +38,25 @@ def buildArtifacts(martifacts, artifacts):
 
     return martifacts
 
+def decompressPath(cpath):
+    path = Path()
+    path.header.stamp = rospy.Time()
+    path.header.frame_id = "world"
+    i = 0
+    while i < len(cpath):
+        pose = PoseStamped()
+        pose.header.frame_id = "world"
+        pose.header.stamp = rospy.Time()
+        pose.pose.position.x = 0.1 * cpath[i]
+        i += 1
+        pose.pose.position.y = 0.1 * cpath[i]
+        i += 1
+        pose.pose.position.z = 0.1 * cpath[i]
+        i += 1
+        path.poses.append(pose)
+
+    return path
+
 if __name__ == '__main__':
     # Usage: python bag_convert_ma_msgs.py inputfile.bag outputfile.bag
 
@@ -67,17 +88,29 @@ if __name__ == '__main__':
                 outbag.write(blTopic, msg, t)
 
             if 'ma_data' in topic:
-                odomTopic = '/' + msg.id + '/odometry'
+                odomTopic = '/' + msg.id + '/ma_pose'
                 odomMsg = msg.odometry
                 outbag.write(odomTopic, odomMsg, t)
 
-                goalTopic = '/' + msg.id + '/ma_goal'
-                goalMsg = msg.goal.pose
-                outbag.write(goalTopic, goalMsg, t)
+                # Old uncompressed message type
+                # goalTopic = '/' + msg.id + '/ma_goal'
+                # goalMsg = msg.goal.pose
+                # outbag.write(goalTopic, goalMsg, t)
+                #
+                # pathTopic = '/' + msg.id + '/ma_goal_path'
+                # pathMsg = msg.goal.path
+                # outbag.write(pathTopic, pathMsg, t)
 
+                # New compressed message type
                 pathTopic = '/' + msg.id + '/ma_goal_path'
-                pathMsg = msg.goal.path
+                pathMsg = decompressPath(msg.goal.path)
                 outbag.write(pathTopic, pathMsg, t)
+
+                goalTopic = '/' + msg.id + '/ma_goal'
+                goalMsg = PoseStamped()
+                if len(pathMsg.poses):
+                    goalMsg = pathMsg.poses[-1]
+                outbag.write(goalTopic, goalMsg, t)
 
                 mbeacon.points = []
                 for beacon in msg.commBeacons.data:
