@@ -1,0 +1,38 @@
+<launch>
+
+  <!-- mapping_server_ip: The IP address of the mapping server -->
+  <!-- Default: 10.100.2.201, which is the expected IP address at actual SubT events. -->
+  <arg name="mapping_server_ip" default="10.100.2.201" />
+  <arg name="port" default="8000" />
+
+  <!-- token: The private token assigned to each team -->
+  <!-- Default: DARPA test token -->
+  <arg name="token" default="FKDzKcNTugczqkpC"/>
+
+  <!-- cloud_topic: The topic to subscribe to that is publishing sensor_msgs/PointCloud2.msgs -->
+  <!-- For Point Cloud Diffs every 10 seconds -->
+  <arg name="cloud_topic" default="/Base/pc_diff" />
+  <!-- For full Point Clouds whenever they're updated -->
+  <!-- <arg name="cloud_topic" default="/Base/merged_map_pc" /> -->
+
+  <!-- marker_array_topic: The topic to subscribe to that is publishing visualization_msgs/MarkerArray.msgs -->
+  <arg name="marker_array_topic" default="no_marker_array"/>
+  <!-- If you want to relay artifact markers, but not sure they're showing up for them -->
+  <!-- <arg name="marker_array_topic" default="/Base/martifacts"/> -->
+
+  <!-- robot_names: The list of robot names which will be subscribed to as /cloud/<robot_name_1>, /grid/<robot_name_1>, /poses/<robot_name_1> ... for N robot_names -->
+  <arg name="robot_names" default="[H01,H02,D01,D02]"/>
+
+  <node pkg="mapping_relay" type="mapping_relay.py" name="mapping_relay" output="screen">
+    <param name="token" value="$(arg token)" />
+    <param name="map_url" value="http://$(arg mapping_server_ip):$(arg port)/map/update/" />
+    <param name="state_url" value="http://$(arg mapping_server_ip):$(arg port)/state/update/"/>
+    <param name="marker_url" value="http://$(arg mapping_server_ip):$(arg port)/markers/update/"/>
+     <!-- <param name="compression" value="none" /> -->
+    <rosparam param="robot_names" subst_value="True">$(arg robot_names)</rosparam>
+    <remap from="cloud" to="$(arg cloud_topic)" />
+    <remap from="grid" to="no_grid" />
+    <remap from="poses" to="no_pose_array" />
+    <remap from="marker_array" to="$(arg marker_array_topic)"/>
+  </node>
+</launch>
