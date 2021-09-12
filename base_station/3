@@ -1,4 +1,4 @@
 #!/bin/bash
 source "$HOME/base_station/base_config"
 
-roslaunch marble_gui marble_gui.launch robots:=$MA_NEIGHBORS
+roslaunch marble_gui marble_gui.launch robots:=$MA_NEIGHBORS ipaddress:=$MA_SCOREADDRESS token:=$MA_SCORETOKEN

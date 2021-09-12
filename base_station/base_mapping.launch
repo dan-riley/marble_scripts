@@ -3,6 +3,7 @@
     <arg name="testRelay" default="false" />
     <arg name="mappingRelay" default="false" />
     <arg name="ipAddress" default="127.0.0.1" />
+    <arg name="token" default="FKDzKcNTugczqkpC" />
     <arg name="robots" default="H01,H02,D01,D02" />
 
     <include file="$(find marble_mapping)/launch/marble_mapping_base.launch" ns="Base">
@@ -12,11 +13,10 @@
     <!-- No longer needed -->
     <!-- <include file="$(find merge_poses_pkg)/launch/merge_poses_ma.launch" /> -->
 
-  <include file="mapping_relay.launch" if="$(arg mappingRelay)">
+  <include file="$(env HOME)/base_station/mapping_relay.launch" if="$(arg mappingRelay)">
     <arg name="mapping_server_ip" value="$(arg ipAddress)" />
     <arg name="robot_names" value="[$(arg robots)]" />
-    <arg name="token" value="FKDzKcNTugczqkpC" if="$(arg testRelay)" />
-    <arg name="token" value="1JDrvQA8GUtUF22a" unless="$(arg testRelay)" />
+    <arg name="token" value="$(arg token)" />
     <arg name="port" value="8001" if="$(arg testRelay)" />
     <arg name="port" value="8000" unless="$(arg testRelay)" />
   </include>

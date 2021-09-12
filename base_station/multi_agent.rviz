@@ -66,6 +66,14 @@ Visualization Manager:
       Value: true
     - Class: rviz/MarkerArray
       Enabled: true
+      Marker Topic: /Base/mnames
+      Name: Names
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
       Marker Topic: /Base/martifacts
       Name: Artifacts
       Namespaces:
@@ -174,7 +182,7 @@ Visualization Manager:
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
-      Color: 52; 101; 164
+      Color: 237; 212; 0
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
@@ -288,7 +296,7 @@ Visualization Manager:
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
-      Color: 255; 25; 0
+      Color: 115; 210; 22
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
@@ -345,7 +353,7 @@ Visualization Manager:
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
-      Color: 114; 159; 207
+      Color: 52; 101; 164
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
@@ -692,7 +700,7 @@ Visualization Manager:
         Alpha: 1
         Axes Length: 2
         Axes Radius: 1
-        Color: 52; 101; 164
+        Color: 237; 212; 0
         Head Length: 1
         Head Radius: 1
         Shaft Length: 1
@@ -760,7 +768,7 @@ Visualization Manager:
         Alpha: 1
         Axes Length: 2
         Axes Radius: 1
-        Color: 255; 25; 0
+        Color: 115; 210; 22
         Head Length: 1
         Head Radius: 1
         Shaft Length: 1
@@ -794,7 +802,7 @@ Visualization Manager:
         Alpha: 1
         Axes Length: 2
         Axes Radius: 1
-        Color: 114; 159; 207
+        Color: 52; 101; 164
         Head Length: 1
         Head Radius: 1
         Shaft Length: 1
@@ -979,7 +987,7 @@ Visualization Manager:
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
-      Color: 252; 233; 79
+      Color: 252; 175; 62
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
@@ -1048,7 +1056,7 @@ Visualization Manager:
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
-      Color: 252; 233; 79
+      Color: 138; 226; 52
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
@@ -1071,7 +1079,7 @@ Visualization Manager:
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
-      Color: 252; 233; 79
+      Color: 114; 159; 207
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224

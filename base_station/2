@@ -8,5 +8,5 @@ read -r -p "Did you remember to change the DARPA server settings? [Y/n] " respon
 response=${response,,}
 if [[ "$response" =~ ^(yes|y|'')$ ]]
 then
-    roslaunch ~/base_station/base_mapping.launch testRelay:=$MA_TESTRELAY mappingRelay:=$MA_MAPPINGRELAY ipAddress:=$MA_IPADDRESS robots:=$MA_NEIGHBORS
+    roslaunch ~/base_station/base_mapping.launch testRelay:=$MA_TESTRELAY mappingRelay:=$MA_MAPPINGRELAY ipAddress:=$MA_IPADDRESS token:=$MA_MAPTOKEN robots:=$MA_NEIGHBORS
 fi
