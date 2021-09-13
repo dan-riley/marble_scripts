@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<launch>
+    <arg name="testRelay" default="false" />
+    <arg name="robots" default="H01,H02,D01,D02" />
+    <arg name="mapAddress" default="10.100.1.201" />
+    <arg name="mapToken" default="1JDrvQA8GUtUF22a" />
+    <arg name="scoreAddress" default="10.100.1.200" />
+    <arg name="scoreToken" default="1JDrvQA8GUtUF22a" />
+
+    <include file="$(env HOME)/base_station/mapping_relay.launch">
+      <arg name="mapping_server_ip" value="$(arg mapAddress)" />
+      <arg name="robot_names" value="[$(arg robots)]" />
+      <arg name="token" value="$(arg mapToken)" />
+      <arg name="port" value="8001" if="$(arg testRelay)" />
+      <arg name="port" value="8000" unless="$(arg testRelay)" />
+    </include>
+
+    <include file="$(find marble_gui)/launch/marble_gui.launch">
+      <arg name="robots" value="$(arg robots)" />
+      <arg name="ipaddress" value="$(arg scoreAddress)" />
+      <arg name="token" value="$(arg scoreToken)" />
+    </include>
+
+    <node pkg="rviz" type="rviz" name="marble_gui" args="-d $(env HOME)/base_station/multi_agent.rviz" respawn="true" />
+ </launch>
