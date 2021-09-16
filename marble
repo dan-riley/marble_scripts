@@ -2,7 +2,7 @@
 
 # Setup variables to quickly switch between various modes
 # Whether to use Ignition or Gazebo
-use_ign=true
+use_ign=false
 
 enable_ground=true
 enable_air=false

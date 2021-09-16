@@ -30,61 +30,61 @@
   </group>
 
   <!-- Spawn Beacons -->
-  <include file="$(env HOME)/marble/scripts/beacon.launch">
-    <arg name="robot_namespace" value="$(arg b1_name)"/>
-    <arg name="x" value="-2"/>
-    <arg name="y" value="-5"/>
-    <arg name="z" value="0.1"/>
-  </include>
-
-  <include file="$(env HOME)/marble/scripts/beacon.launch">
-    <arg name="robot_namespace" value="$(arg b2_name)"/>
-    <arg name="x" value="-2"/>
-    <arg name="y" value="-4"/>
-    <arg name="z" value="0.1"/>
-  </include>
-
-  <include file="$(env HOME)/marble/scripts/beacon.launch">
-    <arg name="robot_namespace" value="$(arg b3_name)"/>
-    <arg name="x" value="-2"/>
-    <arg name="y" value="-3"/>
-    <arg name="z" value="0.1"/>
-  </include>
-
-  <include file="$(env HOME)/marble/scripts/beacon.launch">
-    <arg name="robot_namespace" value="$(arg b4_name)"/>
-    <arg name="x" value="-2"/>
-    <arg name="y" value="-2"/>
-    <arg name="z" value="0.1"/>
-  </include>
-
-  <include file="$(env HOME)/marble/scripts/beacon.launch">
-    <arg name="robot_namespace" value="$(arg b5_name)"/>
-    <arg name="x" value="-2"/>
-    <arg name="y" value="-2"/>
-    <arg name="z" value="0.1"/>
-  </include>
-
-  <include file="$(env HOME)/marble/scripts/beacon.launch">
-    <arg name="robot_namespace" value="$(arg b6_name)"/>
-    <arg name="x" value="-2"/>
-    <arg name="y" value="-2"/>
-    <arg name="z" value="0.1"/>
-  </include>
-
-  <include file="$(env HOME)/marble/scripts/beacon.launch">
-    <arg name="robot_namespace" value="$(arg b7_name)"/>
-    <arg name="x" value="-2"/>
-    <arg name="y" value="-2"/>
-    <arg name="z" value="0.1"/>
-  </include>
-
-  <include file="$(env HOME)/marble/scripts/beacon.launch">
-    <arg name="robot_namespace" value="$(arg b8_name)"/>
-    <arg name="x" value="-2"/>
-    <arg name="y" value="-2"/>
-    <arg name="z" value="0.1"/>
-  </include>
+  <!-- <include file="$(env HOME)/marble/scripts/beacon.launch"> -->
+  <!--   <arg name="robot_namespace" value="$(arg b1_name)"/> -->
+  <!--   <arg name="x" value="&#45;2"/> -->
+  <!--   <arg name="y" value="&#45;5"/> -->
+  <!--   <arg name="z" value="0.1"/> -->
+  <!-- </include> -->
+  <!--  -->
+  <!-- <include file="$(env HOME)/marble/scripts/beacon.launch"> -->
+  <!--   <arg name="robot_namespace" value="$(arg b2_name)"/> -->
+  <!--   <arg name="x" value="&#45;2"/> -->
+  <!--   <arg name="y" value="&#45;4"/> -->
+  <!--   <arg name="z" value="0.1"/> -->
+  <!-- </include> -->
+  <!--  -->
+  <!-- <include file="$(env HOME)/marble/scripts/beacon.launch"> -->
+  <!--   <arg name="robot_namespace" value="$(arg b3_name)"/> -->
+  <!--   <arg name="x" value="&#45;2"/> -->
+  <!--   <arg name="y" value="&#45;3"/> -->
+  <!--   <arg name="z" value="0.1"/> -->
+  <!-- </include> -->
+  <!--  -->
+  <!-- <include file="$(env HOME)/marble/scripts/beacon.launch"> -->
+  <!--   <arg name="robot_namespace" value="$(arg b4_name)"/> -->
+  <!--   <arg name="x" value="&#45;2"/> -->
+  <!--   <arg name="y" value="&#45;2"/> -->
+  <!--   <arg name="z" value="0.1"/> -->
+  <!-- </include> -->
+  <!--  -->
+  <!-- <include file="$(env HOME)/marble/scripts/beacon.launch"> -->
+  <!--   <arg name="robot_namespace" value="$(arg b5_name)"/> -->
+  <!--   <arg name="x" value="&#45;2"/> -->
+  <!--   <arg name="y" value="&#45;2"/> -->
+  <!--   <arg name="z" value="0.1"/> -->
+  <!-- </include> -->
+  <!--  -->
+  <!-- <include file="$(env HOME)/marble/scripts/beacon.launch"> -->
+  <!--   <arg name="robot_namespace" value="$(arg b6_name)"/> -->
+  <!--   <arg name="x" value="&#45;2"/> -->
+  <!--   <arg name="y" value="&#45;2"/> -->
+  <!--   <arg name="z" value="0.1"/> -->
+  <!-- </include> -->
+  <!--  -->
+  <!-- <include file="$(env HOME)/marble/scripts/beacon.launch"> -->
+  <!--   <arg name="robot_namespace" value="$(arg b7_name)"/> -->
+  <!--   <arg name="x" value="&#45;2"/> -->
+  <!--   <arg name="y" value="&#45;2"/> -->
+  <!--   <arg name="z" value="0.1"/> -->
+  <!-- </include> -->
+  <!--  -->
+  <!-- <include file="$(env HOME)/marble/scripts/beacon.launch"> -->
+  <!--   <arg name="robot_namespace" value="$(arg b8_name)"/> -->
+  <!--   <arg name="x" value="&#45;2"/> -->
+  <!--   <arg name="y" value="&#45;2"/> -->
+  <!--   <arg name="z" value="0.1"/> -->
+  <!-- </include> -->
 
    <!-- Spawn X1 -->
   <include file="$(find x1_gazebo)/launch/spawn_x1.launch">
@@ -163,14 +163,14 @@
 
   <!-- Competitor's control nodes -->
   <node name="$(arg anchor_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg anchor_name) $(arg anchor_name)" />
-  <node name="$(arg b1_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b1_name) $(arg b1_name)" />
-  <node name="$(arg b2_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b2_name) $(arg b2_name)" />
-  <node name="$(arg b3_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b3_name) $(arg b3_name)" />
-  <node name="$(arg b4_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b4_name) $(arg b4_name)" />
-  <node name="$(arg b5_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b5_name) $(arg b5_name)" />
-  <node name="$(arg b6_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b6_name) $(arg b6_name)" />
-  <node name="$(arg b7_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b7_name) $(arg b7_name)" />
-  <node name="$(arg b8_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b8_name) $(arg b8_name)" />
+  <!-- <node name="$(arg b1_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b1_name) $(arg b1_name)" /> -->
+  <!-- <node name="$(arg b2_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b2_name) $(arg b2_name)" /> -->
+  <!-- <node name="$(arg b3_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b3_name) $(arg b3_name)" /> -->
+  <!-- <node name="$(arg b4_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b4_name) $(arg b4_name)" /> -->
+  <!-- <node name="$(arg b5_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b5_name) $(arg b5_name)" /> -->
+  <!-- <node name="$(arg b6_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b6_name) $(arg b6_name)" /> -->
+  <!-- <node name="$(arg b7_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b7_name) $(arg b7_name)" /> -->
+  <!-- <node name="$(arg b8_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg b8_name) $(arg b8_name)" /> -->
   <node name="$(arg x1_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg x1_name) $(arg x1_name)" />
   <node name="$(arg x2_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg x2_name) $(arg x2_name)" />
   <!-- <node name="$(arg x3_name)_control" pkg="subt_example" type="subt_example_node" args="$(arg x3_name) $(arg x3_name)" /> -->

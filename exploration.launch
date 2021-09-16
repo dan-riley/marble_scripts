@@ -8,7 +8,7 @@
     <arg name="resolution" value="$(arg resolution)" />
   </include>
 
-  <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+  <include file="$(find timed_roslaunch)/timed_roslaunch.launch">
     <arg name="time" value="$(arg delay)" />
     <arg name="file" value="$(env HOME)/marble/scripts/exploration_ground.launch" />
     <arg name="value" value="vehicle:=X1 resolution:=$(arg resolution)" />
