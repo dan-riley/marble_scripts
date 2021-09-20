@@ -27,8 +27,8 @@ if [ "$1" == "course" ]; then
     # Alpha Course
     MA_SCOREADDRESS="10.100.1.200"
     MA_IPADDRESS="10.100.1.201"
-    MA_SCORETOKEN="1JDrvQA8GUtUF22a"
-    MA_MAPTOKEN="1JDrvQA8GUtUF22a"
+    MA_SCORETOKEN="zQlymxMoMtPqSMB9"
+    MA_MAPTOKEN="zQlymxMoMtPqSMB9"
     MA_TESTRELAY=false
     MA_MAPPINGRELAY=true
   elif [ "$2" == "2" ]; then
