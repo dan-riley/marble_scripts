@@ -2,6 +2,7 @@
 <launch>
   <arg name="H01" default="false" />
   <arg name="H02" default="false" />
+  <arg name="H03" default="false" />
   <arg name="T01" default="false" />
   <arg name="T02" default="false" />
   <arg name="L01" default="false" />
@@ -32,6 +33,16 @@
       <arg name="vehicle" value="H02" />
     </include>
     <node pkg="rviz" type="rviz" name="marble_h02" args="-d $(env HOME)/base_station/h02.rviz" respawn="true" />
+  </group>
+
+  <group if="$(arg H03)">
+    <include file="$(find marble_husky_base)/launch/description.launch">
+      <arg name="name" value="H03" />
+    </include>
+    <include file="$(find odom_to_tf)/launch/odom_to_tf.launch">
+      <arg name="vehicle" value="H03" />
+    </include>
+    <!-- <node pkg="rviz" type="rviz" name="marble_h03" args="&#45;d $(env HOME)/base_station/h03.rviz" respawn="true" /> -->
   </group>
 
   <group if="$(arg T01)">

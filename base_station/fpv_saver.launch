@@ -1,0 +1,32 @@
+<launch>
+  <node pkg="image_view" type="image_saver" name="H01_image_saver">
+      <remap from="image" to="/H01/mesh_comm/Base/fpv" />
+      <param name="image_transport" value="compressed" />
+      <param name="filename_format" value="$(env HOME)/images/H01/image_%04d.jpg" />
+  </node>
+
+  <node pkg="image_view" type="image_saver" name="H02_image_saver">
+      <remap from="image" to="/H02/mesh_comm/Base/fpv" />
+      <param name="image_transport" value="compressed" />
+      <param name="filename_format" value="$(env HOME)/images/H02/image_%04d.jpg" />
+  </node>
+
+    <node pkg="image_view" type="image_saver" name="H03_image_saver">
+      <remap from="image" to="/H03/mesh_comm/Base/fpv" />
+      <param name="image_transport" value="compressed" />
+      <param name="filename_format" value="$(env HOME)/images/H03/image_%04d.jpg" />
+  </node>
+
+  <node pkg="image_view" type="image_saver" name="D01_image_saver">
+      <remap from="image" to="/D01/mesh_comm/Base/fpv" />
+      <param name="image_transport" value="compressed" />
+      <param name="filename_format" value="$(env HOME)/images/D01/image_%04d.jpg" />
+  </node>
+
+  <node pkg="image_view" type="image_saver" name="D02_image_saver">
+      <remap from="image" to="/D02/mesh_comm/Base/fpv" />
+      <param name="image_transport" value="compressed" />
+      <param name="filename_format" value="$(env HOME)/images/D02/image_%04d.jpg" />
+  </node>
+
+</launch>

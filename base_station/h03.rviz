@@ -6,12 +6,10 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /D02 Path1/Shape1
-        - /D02 Odom1/Shape1
-        - /Pose Graph1
-        - /Image1
+        - /H03 Path1/Shape1
+        - /H03 Odom1/Shape1
       Splitter Ratio: 0.5
-    Tree Height: 143
+    Tree Height: 363
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -62,17 +60,17 @@ Visualization Manager:
       Enabled: true
       Links:
         All Links Enabled: true
-        D02_base/base_link:
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        H03_base/base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
       Name: RobotModel
-      Robot Description: D02_base/robot_description
+      Robot Description: H03_base/robot_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -110,9 +108,9 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: true
+      Enabled: false
       Keep: 0
-      Name: D02 Path
+      Name: H03 Path
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
@@ -124,16 +122,16 @@ Visualization Manager:
         Shaft Length: 0.30000001192092896
         Shaft Radius: 0.30000001192092896
         Value: Arrow
-      Topic: /Base/neighbors/D02/odometry
+      Topic: /Base/neighbors/H03/odometry
       Unreliable: false
-      Value: true
+      Value: false
     - Class: rough_octomap/RoughOccupancyGrid
       Enabled: true
       Max. Height Display: 3.4028234663852886e+38
       Max. Octree Depth: 16
       Min. Height Display: -3.4028234663852886e+38
-      Name: D02 Octomap
-      Octomap Topic: /Base/neighbors/D02/map
+      Name: H03 Octomap
+      Octomap Topic: /Base/neighbors/H03/map
       Queue Size: 5
       Value: true
       Voxel Alpha: 1
@@ -158,7 +156,7 @@ Visualization Manager:
         Value: true
       Enabled: false
       Keep: 1
-      Name: D02 Odom
+      Name: H03 Odom
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
@@ -170,7 +168,7 @@ Visualization Manager:
         Shaft Length: 1
         Shaft Radius: 0.5
         Value: Arrow
-      Topic: /Base/neighbors/D02/odometry
+      Topic: /Base/neighbors/H03/odometry
       Unreliable: false
       Value: false
     - Alpha: 1
@@ -181,11 +179,11 @@ Visualization Manager:
       Enabled: true
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
-      Name: D02 Goal
+      Name: H03 Goal
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /Base/neighbors/D02/goal
+      Topic: /Base/neighbors/H03/goal
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -198,7 +196,7 @@ Visualization Manager:
       Length: 0.30000001192092896
       Line Style: Billboards
       Line Width: 0.10000000149011612
-      Name: D02 Goal Path
+      Name: H03 Goal Path
       Offset:
         X: 0
         Y: 0
@@ -208,20 +206,20 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /Base/neighbors/D02/path
+      Topic: /Base/neighbors/H03/path
       Unreliable: false
       Value: true
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
-      Color: 25; 255; 0
+      Color: 52; 101; 164
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
       Length: 0.30000001192092896
       Line Style: Lines
       Line Width: 0.029999999329447746
-      Name: Pose Graph
+      Name: H03 Pose Graph
       Offset:
         X: 0
         Y: 0
@@ -231,19 +229,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /Base/neighbors/D02/pose_graph
-      Unreliable: false
-      Value: true
-    - Class: rviz/Image
-      Enabled: true
-      Image Topic: /D02/mesh_comm/Base/fpv
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: compressed
+      Topic: /Base/neighbors/H03/pose_graph
       Unreliable: false
       Value: true
   Enabled: true
@@ -289,20 +275,18 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.0753979682922363
-      Target Frame: D02_base/base_link
+      Pitch: 0.6303977966308594
+      Target Frame: H03_base/base_link
       Value: ThirdPersonFollower (rviz)
-      Yaw: 3.245403528213501
+      Yaw: 3.225382089614868
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: true
-  Height: 333
+  Height: 328
   Hide Left Dock: true
   Hide Right Dock: true
-  Image:
-    collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001560000011afc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007300000000160000011a000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d0061006700650300000562000001b50000021d0000019a000000010000010f0000011ffc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d0000011f000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000002eb0000003efc0100000002fb0000000800540069006d00650000000000000002eb000002eb00fffffffb0000000800540069006d006501000000000000045000000000000000000000029a0000011a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730000000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000015600000167fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073000000003d00000167000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f0000011ffc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d0000011f000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000002eb0000003efc0100000002fb0000000800540069006d00650000000000000002eb000002eb00fffffffb0000000800540069006d006501000000000000045000000000000000000000029a0000011500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730000000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -313,4 +297,4 @@ Window Geometry:
     collapsed: true
   Width: 666
   X: 4694
-  Y: 1076
+  Y: 358
