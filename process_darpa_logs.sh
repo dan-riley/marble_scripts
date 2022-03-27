@@ -9,7 +9,7 @@ for file in *.tar.gz ; do
   read -a agents <<< "${file%.*}"
   if [ ${#agents[@]} == 7 ]; then
     dir="${agents[6]::-4}"
-    if [ ${#dir} == 1 ]; then
+    if [ ${#dir} -le 2 ]; then
       dir="master"
     fi
   elif [ ${#agents[@]} == 9 ]; then
@@ -21,7 +21,7 @@ for file in *.tar.gz ; do
   fi
 
   mkdir $dir
-  mv "$file" "$dir"
+  cp "$file" "$dir"
 
   cd $dir
   echo "extracting $dir"
